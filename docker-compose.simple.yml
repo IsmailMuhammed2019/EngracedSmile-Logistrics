@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # MySQL Database
+  mysql:
+    image: mysql:8.0
+    container_name: engraced-mysql-simple
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: engraced_root_password
+      MYSQL_DATABASE: engraced_transportation
+      MYSQL_USER: engraced_user
+      MYSQL_PASSWORD: engraced_password
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data_simple:/var/lib/mysql
+      - ./docker/mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - engraced-network-simple
+
+  # Redis for caching and sessions
+  redis:
+    image: redis:7-alpine
+    container_name: engraced-redis-simple
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data_simple:/data
+    networks:
+      - engraced-network-simple
+    command: redis-server --appendonly yes
+
+volumes:
+  mysql_data_simple:
+    driver: local
+  redis_data_simple:
+    driver: local
+
+networks:
+  engraced-network-simple:
+    driver: bridge
