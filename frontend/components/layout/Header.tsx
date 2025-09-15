@@ -79,13 +79,13 @@ const Header = () => {
               className="flex-shrink-0"
             >
               <Link href="/" className="flex items-center">
-                <div className="relative w-16 h-16">
+                <div className="relative w-12 h-12">
                   <Image
                     src="/logo.png"
                     alt="Engraced Smile Logistics"
                     fill
                     className="object-contain"
-                    sizes="64px"
+                    sizes="48px"
                     priority
                   />
                 </div>

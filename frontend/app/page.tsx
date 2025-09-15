@@ -12,23 +12,23 @@ export default function HomePage() {
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [imageLoadErrors, setImageLoadErrors] = useState<boolean[]>([]);
 
-  // Toyota Sienna & minivan transport hero images
+  // Comprehensive transportation hero images
   const heroImages = [
     {
-      url: "https://images.unsplash.com/photo-1583121274602-3e2820c69888?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      alt: "Toyota Sienna style minivan for passenger transport"
+      url: "/cars.avif",
+      alt: "Premium vehicle transportation services"
     },
     {
-      url: "https://images.unsplash.com/photo-1449824913935-59a10b8d2000?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      alt: "Highway transportation and travel"
+      url: "/flight.webp",
+      alt: "Flight booking and air travel services"
     },
     {
-      url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      alt: "Road trip and passenger transport"
+      url: "/logistics.png",
+      alt: "Comprehensive logistics and cargo services"
     },
     {
-      url: "https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80",
-      alt: "Inter-state passenger transport service"
+      url: "/plane.webp",
+      alt: "Air travel and aviation services"
     }
   ];
 
@@ -226,17 +226,17 @@ export default function HomePage() {
               className="inline-flex items-center px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/20"
             >
               <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-              Nigeria's Leading Transportation Company
+              Nigeria's Leading Transportation & Logistics Company
             </motion.div>
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-              <span className="block">Premium Transportation</span>
-              <span className="block text-primary-300 font-light">Made Simple</span>
+              <span className="block">Transportation, Flights &</span>
+              <span className="block text-primary-300 font-light">Logistics Solutions</span>
             </h1>
             
             <p className="text-lg md:text-xl mb-10 text-gray-200 max-w-2xl mx-auto leading-relaxed">
-              Experience comfort, safety, and reliability with our modern fleet of vehicles. 
-              Professional drivers, real-time tracking, and 24/7 customer support.
+              Experience comprehensive transportation solutions including premium vehicles, flight bookings, 
+              and logistics services. Professional service, real-time tracking, and 24/7 customer support.
             </p>
 
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
@@ -336,7 +336,7 @@ export default function HomePage() {
                 capacity: "8 passengers",
                 features: ["Air Conditioning", "WiFi Connectivity", "Entertainment System", "Professional Driver", "Luggage Space"],
                 badge: "Most Popular",
-                image: "/images/cars/sienna.webp"
+                image: "/sienna.webp"
               },
               {
                 title: "Toyota Sienna Executive",
@@ -346,7 +346,7 @@ export default function HomePage() {
                 capacity: "8 passengers",
                 features: ["Premium Interior", "Enhanced AC", "Leather Seats", "Professional Service", "Extra Comfort"],
                 badge: "Executive",
-                image: "/images/cars/sienna2.avif"
+                image: "/sienna2.avif"
               },
               {
                 title: "Toyota Sienna VIP",
@@ -356,7 +356,7 @@ export default function HomePage() {
                 capacity: "7 passengers",
                 features: ["VIP Interior", "Captain Chairs", "Premium Service", "Entertainment Suite", "Maximum Comfort"],
                 badge: "Premium",
-                image: "/images/cars/sienna3.avif"
+                image: "/sienna3.avif"
               }
             ].map((vehicle, index) => (
               <motion.div
@@ -786,7 +786,7 @@ export default function HomePage() {
             </p>
           </motion.div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
             {[
               {
                 id: 1,
@@ -808,12 +808,21 @@ export default function HomePage() {
               },
               {
                 id: 3,
+                title: 'Logistics & Cargo',
+                description: 'Comprehensive logistics solutions for cargo transportation, warehousing, and supply chain management.',
+                icon: '📦',
+                features: ['Cargo Transport', 'Warehousing', 'Supply Chain', 'Real-time Tracking'],
+                price: 'Competitive Rates',
+                color: 'purple'
+              },
+              {
+                id: 4,
                 title: 'Luxury Car Rental',
                 description: 'Premium executive and luxury vehicles for special occasions and business travel.',
                 icon: '🚗',
                 features: ['Premium Vehicles', 'Professional Drivers', 'Flexible Duration', 'Insurance Included'],
                 price: 'From ₦25,000/day',
-                color: 'purple'
+                color: 'orange'
               }
             ].map((service, index) => (
               <motion.div

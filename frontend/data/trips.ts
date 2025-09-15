@@ -62,7 +62,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'standard',
       model: 'Toyota Sienna',
-      image: '/images/cars/sienna.webp',
+      image: '/sienna.webp',
       totalSeats: 8,
       availableSeats: 3,
       features: ['AC', 'WiFi', 'USB Charging', 'Entertainment', 'Refreshments']
@@ -89,7 +89,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'executive',
       model: 'Toyota Sienna Executive',
-      image: '/images/cars/sienna2.avif',
+      image: '/sienna2.avif',
       totalSeats: 8,
       availableSeats: 5,
       features: ['Premium AC', 'WiFi', 'Leather Seats', 'Premium Audio', 'Snacks', 'Water']
@@ -116,7 +116,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'vip',
       model: 'Toyota Sienna VIP',
-      image: '/images/cars/sienna3.avif',
+      image: '/sienna3.avif',
       totalSeats: 7,
       availableSeats: 2,
       features: ['VIP Interior', 'Captain Chairs', 'Premium Service', 'Entertainment Suite', 'Meals', 'Personal Assistant']
@@ -143,7 +143,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'standard',
       model: 'Toyota Sienna',
-      image: '/images/cars/sienna.webp',
+      image: '/sienna.webp',
       totalSeats: 8,
       availableSeats: 6,
       features: ['AC', 'WiFi', 'USB Charging', 'Entertainment', 'Refreshments']
@@ -170,7 +170,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'executive',
       model: 'Toyota Sienna Executive',
-      image: '/images/cars/sienna2.avif',
+      image: '/sienna2.avif',
       totalSeats: 8,
       availableSeats: 4,
       features: ['Premium AC', 'WiFi', 'Leather Seats', 'Premium Audio', 'Snacks', 'Water']
@@ -197,7 +197,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'vip',
       model: 'Toyota Sienna VIP',
-      image: '/images/cars/sienna3.avif',
+      image: '/sienna3.avif',
       totalSeats: 7,
       availableSeats: 1,
       features: ['VIP Interior', 'Captain Chairs', 'Premium Service', 'Entertainment Suite', 'Meals', 'Personal Assistant']
@@ -224,7 +224,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'standard',
       model: 'Toyota Sienna',
-      image: '/images/cars/sienna.webp',
+      image: '/sienna.webp',
       totalSeats: 8,
       availableSeats: 7,
       features: ['AC', 'WiFi', 'USB Charging', 'Entertainment', 'Refreshments']
@@ -251,7 +251,7 @@ export const demoTrips: Trip[] = [
     vehicle: {
       type: 'executive',
       model: 'Toyota Sienna Executive',
-      image: '/images/cars/sienna2.avif',
+      image: '/sienna2.avif',
       totalSeats: 8,
       availableSeats: 8,
       features: ['Premium AC', 'WiFi', 'Leather Seats', 'Premium Audio', 'Snacks', 'Water']

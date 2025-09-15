@@ -104,13 +104,13 @@ export default function ServicesPage() {
               viewport={{ once: true }}
             >
               <span className="inline-block px-4 py-2 bg-primary-100 text-primary-600 rounded-full text-sm font-medium mb-4">
-                Our Fleet
+                Our Services
               </span>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
-                Premium Vehicle Collection
+                Comprehensive Transportation Solutions
               </h2>
               <p className="text-lg text-gray-600 max-w-2xl mx-auto">
-                Choose from our carefully maintained fleet of modern vehicles, each designed for comfort, safety, and style.
+                From premium vehicles to flight bookings and logistics services, we provide complete transportation solutions for all your needs.
               </p>
             </motion.div>
           </div>
@@ -125,7 +125,7 @@ export default function ServicesPage() {
                 capacity: "8 passengers",
                 features: ["Air Conditioning", "WiFi Connectivity", "Entertainment System", "Professional Driver", "Luggage Space"],
                 badge: "Most Popular",
-                image: "/images/cars/sienna.webp"
+                image: "/sienna.webp"
               },
               {
                 title: "Toyota Sienna Executive",
@@ -135,7 +135,7 @@ export default function ServicesPage() {
                 capacity: "8 passengers",
                 features: ["Premium Interior", "Enhanced AC", "Leather Seats", "Professional Service", "Extra Comfort"],
                 badge: "Executive",
-                image: "/images/cars/sienna2.avif"
+                image: "/sienna2.avif"
               },
               {
                 title: "Toyota Sienna VIP",
@@ -145,7 +145,7 @@ export default function ServicesPage() {
                 capacity: "7 passengers",
                 features: ["VIP Interior", "Captain Chairs", "Premium Service", "Entertainment Suite", "Maximum Comfort"],
                 badge: "Premium",
-                image: "/images/cars/sienna3.avif"
+                image: "/sienna3.avif"
               }
             ].map((vehicle, index) => (
               <motion.div
@@ -209,6 +209,122 @@ export default function ServicesPage() {
                 </div>
               </motion.div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Additional Services Section */}
+      <section className="py-20 bg-gray-50">
+        <div className="max-w-7xl mx-auto px-4">
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-16"
+          >
+            <h2 className="text-4xl font-bold text-gray-900 mb-4">
+              Additional Services
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Beyond transportation, we offer comprehensive travel and logistics solutions
+            </p>
+          </motion.div>
+
+          <div className="grid md:grid-cols-2 gap-8">
+            {/* Flight Booking Service */}
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="text-5xl mr-4">✈️</div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Flight Booking</h3>
+                  <p className="text-primary-600 font-medium">Domestic & International</p>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Book domestic and international flights with competitive prices and excellent service. 
+                We partner with major airlines to bring you the best deals.
+              </p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Best Price Guarantee
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  24/7 Booking Support
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Flexible Cancellation
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Instant Confirmation
+                </li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 font-semibold"
+                onClick={() => window.location.href = '/booking'}
+              >
+                Book Flight
+              </motion.button>
+            </motion.div>
+
+            {/* Logistics Service */}
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="bg-white rounded-xl shadow-lg p-8 hover:shadow-xl transition-all duration-300"
+            >
+              <div className="flex items-center mb-6">
+                <div className="text-5xl mr-4">📦</div>
+                <div>
+                  <h3 className="text-2xl font-bold text-gray-900">Logistics & Cargo</h3>
+                  <p className="text-primary-600 font-medium">Complete Supply Chain Solutions</p>
+                </div>
+              </div>
+              <p className="text-gray-600 mb-6">
+                Comprehensive logistics solutions for cargo transportation, warehousing, 
+                and supply chain management across Nigeria and beyond.
+              </p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Cargo Transportation
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Warehousing Solutions
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Supply Chain Management
+                </li>
+                <li className="flex items-center text-gray-700">
+                  <span className="text-green-500 mr-3">✓</span>
+                  Real-time Tracking
+                </li>
+              </ul>
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-3 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 font-semibold"
+                onClick={() => window.location.href = '/contact'}
+              >
+                Get Quote
+              </motion.button>
+            </motion.div>
           </div>
         </div>
       </section>

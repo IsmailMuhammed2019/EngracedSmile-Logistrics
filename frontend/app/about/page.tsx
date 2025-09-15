@@ -48,8 +48,9 @@ export default function AboutPage() {
                 </p>
                 <p className="text-gray-700 mb-6">
                   Our comprehensive range of services includes inter-state transportation with modern Sienna 
-                  vehicles, luxury car rentals for special occasions, and seamless flight booking services 
-                  for both domestic and international travel.
+                  vehicles, luxury car rentals for special occasions, seamless flight booking services 
+                  for both domestic and international travel, and complete logistics solutions for cargo 
+                  transportation and supply chain management.
                 </p>
                 <p className="text-gray-700 mb-8">
                   We believe that every journey should be comfortable, safe, and memorable. That's why we've 

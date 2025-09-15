@@ -153,7 +153,7 @@ export default function BookingPage() {
                 capacity: "8 passengers",
                 features: ["Air Conditioning", "WiFi Connectivity", "Entertainment System", "Professional Driver", "Luggage Space"],
                 badge: "Most Popular",
-                image: "/images/cars/sienna.webp"
+                image: "/sienna.webp"
               },
               {
                 title: "Toyota Sienna Executive",
@@ -163,7 +163,7 @@ export default function BookingPage() {
                 capacity: "8 passengers",
                 features: ["Premium Interior", "Enhanced AC", "Leather Seats", "Professional Service", "Extra Comfort"],
                 badge: "Executive",
-                image: "/images/cars/sienna2.avif"
+                image: "/sienna2.avif"
               },
               {
                 title: "Toyota Sienna VIP",
@@ -173,7 +173,7 @@ export default function BookingPage() {
                 capacity: "7 passengers",
                 features: ["VIP Interior", "Captain Chairs", "Premium Service", "Entertainment Suite", "Maximum Comfort"],
                 badge: "Premium",
-                image: "/images/cars/sienna3.avif"
+                image: "/sienna3.avif"
               }
             ].map((vehicle, index) => (
               <motion.div

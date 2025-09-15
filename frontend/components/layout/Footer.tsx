@@ -16,6 +16,7 @@ const Footer = () => {
   const services = [
     { name: 'Inter-State Transportation', href: '/services/transportation' },
     { name: 'Flight Booking', href: '/services/flights' },
+    { name: 'Logistics & Cargo', href: '/services/logistics' },
     { name: 'Luxury Car Rental', href: '/services/luxury-cars' },
     { name: 'Corporate Travel', href: '/services/corporate' },
     { name: 'Airport Transfer', href: '/services/airport-transfer' },
@@ -87,13 +88,13 @@ const Footer = () => {
               viewport={{ once: true }}
             >
               <div className="flex items-center space-x-3 mb-6">
-                <div className="relative w-12 h-12">
+                <div className="relative w-10 h-10">
                   <Image
                     src="/logo.png"
                     alt="Engraced Smile Logistics"
                     fill
                     className="object-contain"
-                    sizes="48px"
+                    sizes="40px"
                   />
                 </div>
               </div>
