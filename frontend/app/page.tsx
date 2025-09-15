@@ -15,19 +15,19 @@ export default function HomePage() {
   // Comprehensive transportation hero images
   const heroImages = [
     {
-      url: "/cars.avif",
+      url: "/cars.jpg",
       alt: "Premium vehicle transportation services"
     },
     {
-      url: "/flight.webp",
+      url: "/flight.jpg",
       alt: "Flight booking and air travel services"
     },
     {
-      url: "/logistics.png",
+      url: "/logistics.jpg",
       alt: "Comprehensive logistics and cargo services"
     },
     {
-      url: "/plane.webp",
+      url: "/plane.jpg",
       alt: "Air travel and aviation services"
     }
   ];
@@ -336,7 +336,7 @@ export default function HomePage() {
                 capacity: "8 passengers",
                 features: ["Air Conditioning", "WiFi Connectivity", "Entertainment System", "Professional Driver", "Luggage Space"],
                 badge: "Most Popular",
-                image: "/sienna.webp"
+                image: "/sienna.jpg"
               },
               {
                 title: "Toyota Sienna Executive",
@@ -346,7 +346,7 @@ export default function HomePage() {
                 capacity: "8 passengers",
                 features: ["Premium Interior", "Enhanced AC", "Leather Seats", "Professional Service", "Extra Comfort"],
                 badge: "Executive",
-                image: "/sienna2.avif"
+                image: "/sienna2.jpg"
               },
               {
                 title: "Toyota Sienna VIP",
@@ -356,7 +356,7 @@ export default function HomePage() {
                 capacity: "7 passengers",
                 features: ["VIP Interior", "Captain Chairs", "Premium Service", "Entertainment Suite", "Maximum Comfort"],
                 badge: "Premium",
-                image: "/sienna3.avif"
+                image: "/sienna3.jpg"
               }
             ].map((vehicle, index) => (
               <motion.div
@@ -1429,7 +1429,7 @@ export default function HomePage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 bg-gradient-to-r from-accent-600 to-primary-800">
+      <section className="py-20 bg-gradient-to-r from-primary-600 to-primary-800">
         <div className="max-w-4xl mx-auto text-center px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -1440,7 +1440,7 @@ export default function HomePage() {
             <h2 className="text-4xl font-bold text-white mb-6">
               Ready to Start Your Journey?
             </h2>
-            <p className="text-xl text-accent-100 mb-8 max-w-2xl mx-auto">
+            <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
               Join thousands of satisfied customers who trust Engraced Smile Logistics 
               for their transportation needs.
             </p>
@@ -1448,7 +1448,7 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="bg-white text-accent-600 hover:bg-accent-50 px-8 py-4 rounded-lg font-semibold transition-colors"
+                className="bg-white text-primary-600 hover:bg-gray-50 px-8 py-4 rounded-lg font-semibold transition-colors"
                 onClick={() => window.location.href = '/booking'}
               >
                 Book Your Trip
@@ -1457,7 +1457,7 @@ export default function HomePage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.location.href = '/contact'}
-                className="border-2 border-white text-white hover:bg-white hover:text-accent-600 px-8 py-4 rounded-lg font-semibold transition-colors"
+                className="border-2 border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-lg font-semibold transition-colors"
               >
                 Contact Us
               </motion.button>

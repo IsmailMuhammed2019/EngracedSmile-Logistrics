@@ -7,7 +7,7 @@ WORKDIR /app
 # Install system dependencies
 RUN apk add --no-cache curl
 
-# Copy package files
+# Copy package files first for better caching
 COPY package*.json ./
 
 # Install dependencies
@@ -18,6 +18,9 @@ COPY . .
 
 # Build the application
 RUN npm run build
+
+# Remove dev dependencies to reduce image size
+RUN npm prune --production
 
 # Expose port
 EXPOSE 3001

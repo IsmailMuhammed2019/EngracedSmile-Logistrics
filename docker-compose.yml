@@ -46,7 +46,7 @@ services:
     ports:
       - "3001:3001"
     environment:
-      - NODE_ENV=development
+      - NODE_ENV=production
       - DB_HOST=mysql
       - DB_PORT=3306
       - DB_USERNAME=engraced_user
@@ -57,9 +57,6 @@ services:
       - JWT_SECRET=your-super-secret-jwt-key-change-this-in-production
       - JWT_EXPIRES_IN=7d
       - PORT=3001
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
     depends_on:
       mysql:
         condition: service_healthy
