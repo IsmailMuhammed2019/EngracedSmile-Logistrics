@@ -74,7 +74,7 @@ const BookingForm = () => {
                 value={formData.from}
                 onChange={(e) => handleInputChange('from', e.target.value)}
                 placeholder="Departure location"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-gray-400"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-gray-400"
                 required
               />
             </div>
@@ -92,7 +92,7 @@ const BookingForm = () => {
                 value={formData.to}
                 onChange={(e) => handleInputChange('to', e.target.value)}
                 placeholder="Destination"
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-gray-400"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-gray-400"
                 required
               />
             </div>
@@ -109,7 +109,7 @@ const BookingForm = () => {
                 type="date"
                 value={formData.date}
                 onChange={(e) => handleInputChange('date', e.target.value)}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all text-gray-400"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all text-gray-400"
                 required
               />
             </div>
@@ -125,7 +125,7 @@ const BookingForm = () => {
               <select
                 value={formData.passengers}
                 onChange={(e) => handleInputChange('passengers', parseInt(e.target.value))}
-                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent outline-none transition-all bg-white text-gray-400"
+                className="w-full pl-10 pr-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none transition-all bg-white text-gray-400"
               >
                 {[1, 2, 3, 4, 5, 6, 7, 8].map(num => (
                   <option key={num} value={num}>
@@ -152,7 +152,7 @@ const BookingForm = () => {
                 key={service.value}
                             className={`relative flex items-center p-4 border-2 rounded-lg cursor-pointer transition-all duration-200 ${
               formData.service === service.value
-                ? 'border-purple-500 bg-purple-50'
+                ? 'border-primary-500 bg-primary-50'
                 : 'border-gray-200 hover:border-gray-300'
             }`}
               >
@@ -167,7 +167,7 @@ const BookingForm = () => {
                 <span className="text-2xl mr-3">{service.icon}</span>
                 <span className="font-medium text-gray-900">{service.label}</span>
                 {formData.service === service.value && (
-                  <div className="absolute top-2 right-2 w-4 h-4 bg-purple-500 rounded-full flex items-center justify-center">
+                  <div className="absolute top-2 right-2 w-4 h-4 bg-primary-500 rounded-full flex items-center justify-center">
                     <div className="w-2 h-2 bg-white rounded-full"></div>
                   </div>
                 )}
@@ -182,7 +182,7 @@ const BookingForm = () => {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
             type="submit"
-            className="w-full bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-lg shadow-lg"
+            className="w-full bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white py-4 px-6 rounded-lg font-semibold transition-all duration-300 flex items-center justify-center space-x-2 text-lg shadow-lg"
           >
             <MagnifyingGlassIcon className="w-6 h-6" />
             <span>Search Available Trips</span>
@@ -191,7 +191,7 @@ const BookingForm = () => {
 
         {/* Quick Info */}
         <div className="mt-6 text-center text-sm text-gray-600">
-          <p>Need help? Call us at <a href="tel:+2348012345678" className="text-purple-600 hover:underline">+234 801 234 5678</a></p>
+          <p>Need help? Call us at <a href="tel:+2348012345678" className="text-primary-600 hover:underline">+234 801 234 5678</a></p>
         </div>
       </form>
     </motion.div>

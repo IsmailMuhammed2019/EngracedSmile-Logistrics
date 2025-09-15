@@ -78,9 +78,9 @@ export default function HomePage() {
   }, [heroImages.length]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary-50">
       {/* Enhanced Header with Live Time */}
-      <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-purple-100">
+      <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-primary-100">
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
@@ -104,14 +104,14 @@ export default function HomePage() {
               )}
             </div>
             <nav className="hidden md:flex space-x-8">
-              <a href="#services" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">Services</a>
-              <a href="#booking" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">Book Now</a>
-              <a href="#about" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">About</a>
-              <a href="#contact" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">Contact</a>
-              <a href="#pricing" className="text-gray-700 hover:text-purple-600 transition-colors font-medium">Pricing</a>
+              <a href="/services" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Services</a>
+              <a href="/booking" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Book Now</a>
+              <a href="/about" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">About</a>
+              <a href="/contact" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Contact</a>
+              <a href="#pricing" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Pricing</a>
             </nav>
             <div className="flex items-center space-x-4">
-              <button className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-6 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-all duration-300 font-medium shadow-lg">
+              <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 font-medium shadow-lg">
                 Download App
               </button>
             </div>
@@ -123,7 +123,7 @@ export default function HomePage() {
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Rotating Background Images */}
         <div className="absolute inset-0">
-          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-purple-900/70 z-10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-gray-900/80 via-gray-900/60 to-primary-900/70 z-10"></div>
           <div className="w-full h-full relative overflow-hidden bg-gradient-to-br from-gray-800 to-gray-900">
             {heroImages.map((image, index) => (
               <motion.div
@@ -231,7 +231,7 @@ export default function HomePage() {
 
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
               <span className="block">Premium Transportation</span>
-              <span className="block text-purple-300 font-light">Made Simple</span>
+              <span className="block text-primary-300 font-light">Made Simple</span>
             </h1>
             
             <p className="text-lg md:text-xl mb-10 text-gray-200 max-w-2xl mx-auto leading-relaxed">
@@ -243,8 +243,8 @@ export default function HomePage() {
               <motion.button
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
-                className="bg-purple-600 hover:bg-purple-700 text-white text-lg px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                className="bg-primary-600 hover:bg-primary-700 text-white text-lg px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl"
+                onClick={() => window.location.href = '/booking'}
               >
                 Book Your Journey
               </motion.button>
@@ -265,15 +265,15 @@ export default function HomePage() {
               className="grid grid-cols-3 gap-8 mt-16 pt-8 border-t border-white/20"
             >
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-purple-300">10K+</div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-300">10K+</div>
                 <div className="text-sm text-gray-300">Happy Customers</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-purple-300">50+</div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-300">50+</div>
                 <div className="text-sm text-gray-300">Modern Vehicles</div>
               </div>
               <div className="text-center">
-                <div className="text-2xl md:text-3xl font-bold text-purple-300">24/7</div>
+                <div className="text-2xl md:text-3xl font-bold text-primary-300">24/7</div>
                 <div className="text-sm text-gray-300">Customer Support</div>
               </div>
             </motion.div>
@@ -283,7 +283,7 @@ export default function HomePage() {
         {/* Floating Elements */}
         <div className="absolute inset-0 z-10">
           <motion.div
-            className="absolute top-1/4 left-1/12 w-3 h-3 bg-purple-400 rounded-full opacity-60"
+            className="absolute top-1/4 left-1/12 w-3 h-3 bg-primary-400 rounded-full opacity-60"
             animate={{ y: [0, -20, 0], opacity: [0.6, 1, 0.6] }}
             transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -293,7 +293,7 @@ export default function HomePage() {
             transition={{ duration: 5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
           />
           <motion.div
-            className="absolute bottom-1/3 left-1/6 w-4 h-4 bg-purple-300 rounded-full opacity-30"
+            className="absolute bottom-1/3 left-1/6 w-4 h-4 bg-primary-300 rounded-full opacity-30"
             animate={{ y: [0, -25, 0], opacity: [0.3, 0.7, 0.3] }}
             transition={{ duration: 6, repeat: Infinity, ease: "easeInOut", delay: 2 }}
           />
@@ -313,7 +313,7 @@ export default function HomePage() {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <span className="inline-block px-4 py-2 bg-purple-100 text-purple-600 rounded-full text-sm font-medium mb-4">
+              <span className="inline-block px-4 py-2 bg-primary-100 text-primary-600 rounded-full text-sm font-medium mb-4">
                 Our Fleet
               </span>
               <h2 className="text-3xl md:text-5xl font-bold text-gray-900 mb-6">
@@ -378,7 +378,7 @@ export default function HomePage() {
                   
                   {/* Badge */}
                   <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-purple-600 text-white text-xs font-semibold rounded-full">
+                    <span className="px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
                       {vehicle.badge}
                     </span>
                   </div>
@@ -393,7 +393,7 @@ export default function HomePage() {
                 <div className="p-8">
                   <div className="mb-6">
                     <h3 className="text-2xl font-bold text-gray-900 mb-1">{vehicle.title}</h3>
-                    <p className="text-purple-600 font-medium">{vehicle.subtitle}</p>
+                    <p className="text-primary-600 font-medium">{vehicle.subtitle}</p>
                   </div>
 
                   {/* Features */}
@@ -419,8 +419,8 @@ export default function HomePage() {
                     <motion.button
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      className="px-6 py-2 bg-purple-600 hover:bg-purple-700 text-white rounded-lg font-medium transition-colors"
-                      onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                      className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors"
+                      onClick={() => window.location.href = '/booking'}
                     >
                       Book Now
                     </motion.button>
@@ -519,19 +519,19 @@ export default function HomePage() {
                 </p>
                 <div className="grid grid-cols-2 gap-6 mt-8">
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">10K+</div>
+                    <div className="text-3xl font-bold text-primary-600">10K+</div>
                     <div className="text-gray-600">Happy Customers</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">50+</div>
+                    <div className="text-3xl font-bold text-primary-600">50+</div>
                     <div className="text-gray-600">Vehicles</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">15+</div>
+                    <div className="text-3xl font-bold text-primary-600">15+</div>
                     <div className="text-gray-600">States Covered</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-3xl font-bold text-purple-600">24/7</div>
+                    <div className="text-3xl font-bold text-primary-600">24/7</div>
                     <div className="text-gray-600">Support</div>
                   </div>
                 </div>
@@ -546,7 +546,7 @@ export default function HomePage() {
               className="grid grid-cols-2 gap-4"
             >
               <div className="space-y-4">
-                <div className="bg-purple-50 rounded-lg p-6 border border-purple-100">
+                <div className="bg-primary-50 rounded-lg p-6 border border-primary-100">
                   <div className="text-3xl mb-3">🚐</div>
                   <h3 className="font-semibold text-gray-900 mb-2">Modern Fleet</h3>
                   <p className="text-gray-600 text-sm">Well-maintained vehicles with modern amenities</p>
@@ -563,7 +563,7 @@ export default function HomePage() {
                   <h3 className="font-semibold text-gray-900 mb-2">Quality Service</h3>
                   <p className="text-gray-600 text-sm">Exceptional customer service and satisfaction</p>
                 </div>
-                <div className="bg-purple-50 rounded-lg p-6 border border-purple-100">
+                <div className="bg-primary-50 rounded-lg p-6 border border-primary-100">
                   <div className="text-3xl mb-3">📍</div>
                   <h3 className="font-semibold text-gray-900 mb-2">Wide Coverage</h3>
                   <p className="text-gray-600 text-sm">Serving major cities across Nigeria</p>
@@ -575,7 +575,7 @@ export default function HomePage() {
       </section>
 
       {/* Quick Booking Section */}
-      <section id="booking" className="py-20 bg-gradient-to-br from-gray-50 to-purple-50">
+      <section id="booking" className="py-20 bg-gradient-to-br from-gray-50 to-primary-50">
         <div className="max-w-7xl mx-auto px-4">
           <motion.div
             initial={{ opacity: 0, y: 30 }}
@@ -667,7 +667,7 @@ export default function HomePage() {
                       }}
                       transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
                     >
-                      <div className="w-8 h-8 bg-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                      <div className="w-8 h-8 bg-primary-600 rounded-full flex items-center justify-center shadow-lg">
                         <div className="w-4 h-4 bg-white rounded-sm"></div>
                       </div>
                     </motion.div>
@@ -715,8 +715,8 @@ export default function HomePage() {
             >
               <div className="space-y-8">
                 <div className="flex items-start space-x-4">
-                  <div className="flex-shrink-0 w-12 h-12 bg-purple-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <div className="flex-shrink-0 w-12 h-12 bg-primary-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-6 h-6 text-primary-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
                     </svg>
@@ -840,7 +840,7 @@ export default function HomePage() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="mt-4 w-full bg-gradient-to-r from-primary-600 to-accent-600 text-white py-2 rounded-lg hover:from-primary-700 hover:to-accent-700 transition-all duration-300"
-                  onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => window.location.href = '/booking'}
                 >
                   Book Now
                 </motion.button>
@@ -964,7 +964,7 @@ export default function HomePage() {
                       ? 'bg-gradient-to-r from-accent-600 to-primary-600 text-white hover:from-accent-700 hover:to-primary-700'
                       : 'bg-primary-600 text-white hover:bg-primary-700'
                   }`}
-                  onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                  onClick={() => window.location.href = '/booking'}
                 >
                   Book Now
                 </motion.button>
@@ -1127,7 +1127,7 @@ export default function HomePage() {
                   </div>
                   <div>
                     <h3 className="font-semibold text-gray-900 text-lg">{testimonial.name}</h3>
-                    <p className="text-purple-600 font-medium">{testimonial.role}</p>
+                    <p className="text-primary-600 font-medium">{testimonial.role}</p>
                   </div>
                 </div>
                 
@@ -1253,7 +1253,7 @@ export default function HomePage() {
                 <div className="space-y-3">
                   <button 
                     className="w-full text-left p-3 bg-primary-50 hover:bg-primary-100 rounded-lg transition-colors"
-                    onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                    onClick={() => window.location.href = '/booking'}
                   >
                     📱 Book a Trip
                   </button>
@@ -1341,7 +1341,7 @@ export default function HomePage() {
       </section>
 
       {/* Mobile App Download Section */}
-      <section className="py-24 bg-gradient-to-br from-purple-600 via-purple-700 to-purple-800">
+      <section className="py-24 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800">
         <div className="container mx-auto px-6">
           <div className="max-w-4xl mx-auto text-center">
             <motion.div
@@ -1358,7 +1358,7 @@ export default function HomePage() {
               <h2 className="text-3xl md:text-5xl font-bold text-white mb-6">
                 Get Our Mobile App
               </h2>
-              <p className="text-lg md:text-xl text-purple-100 mb-12 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg md:text-xl text-primary-100 mb-12 max-w-2xl mx-auto leading-relaxed">
                 Experience seamless booking and tracking on your mobile device. 
                 Download our app for instant access to all transportation services.
               </p>
@@ -1371,7 +1371,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">Quick Booking</h3>
-                  <p className="text-purple-200 text-sm">Book rides in seconds with our intuitive interface</p>
+                  <p className="text-primary-200 text-sm">Book rides in seconds with our intuitive interface</p>
                 </div>
                 
                 <div className="text-center">
@@ -1381,7 +1381,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">Live Tracking</h3>
-                  <p className="text-purple-200 text-sm">Track your vehicle in real-time anywhere</p>
+                  <p className="text-primary-200 text-sm">Track your vehicle in real-time anywhere</p>
                 </div>
                 
                 <div className="text-center">
@@ -1391,7 +1391,7 @@ export default function HomePage() {
                     </svg>
                   </div>
                   <h3 className="text-lg font-semibold text-white mb-2">Push Notifications</h3>
-                  <p className="text-purple-200 text-sm">Get instant updates about your journey</p>
+                  <p className="text-primary-200 text-sm">Get instant updates about your journey</p>
                 </div>
               </div>
 
@@ -1399,7 +1399,7 @@ export default function HomePage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="bg-white text-purple-600 hover:bg-purple-50 px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
+                  className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-xl font-semibold transition-all duration-300 shadow-lg hover:shadow-xl flex items-center justify-center space-x-3"
                 >
                   <svg className="w-6 h-6" viewBox="0 0 24 24" fill="currentColor">
                     <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
@@ -1409,7 +1409,7 @@ export default function HomePage() {
                 <motion.button
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
-                  className="border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-purple-600 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
+                  className="border-2 border-white/30 hover:border-white text-white hover:bg-white hover:text-primary-600 px-8 py-4 rounded-xl font-semibold transition-all duration-300"
                 >
                   View Features
                 </motion.button>
@@ -1440,13 +1440,14 @@ export default function HomePage() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className="bg-white text-accent-600 hover:bg-accent-50 px-8 py-4 rounded-lg font-semibold transition-colors"
-                onClick={() => document.getElementById('booking')?.scrollIntoView({ behavior: 'smooth' })}
+                onClick={() => window.location.href = '/booking'}
               >
                 Book Your Trip
               </motion.button>
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
+                onClick={() => window.location.href = '/contact'}
                 className="border-2 border-white text-white hover:bg-white hover:text-accent-600 px-8 py-4 rounded-lg font-semibold transition-colors"
               >
                 Contact Us
@@ -1500,7 +1501,7 @@ export default function HomePage() {
             <div>
               <h4 className="text-lg font-semibold mb-4">Mobile App</h4>
               <p className="text-gray-400 mb-4">Download our mobile app</p>
-              <button className="bg-gradient-to-r from-purple-600 to-purple-700 text-white px-4 py-2 rounded-lg hover:from-purple-700 hover:to-purple-800 transition-colors">
+              <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-4 py-2 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-colors">
                 Get Mobile App
               </button>
             </div>

@@ -70,8 +70,8 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <meta name="theme-color" content="#9f7aea" />
-        <meta name="msapplication-TileColor" content="#9f7aea" />
+        <meta name="theme-color" content="#79631b" />
+        <meta name="msapplication-TileColor" content="#79631b" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
         <link rel="manifest" href="/manifest.json" />
       </head>

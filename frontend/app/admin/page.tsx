@@ -74,7 +74,7 @@ export default function AdminDashboard() {
         <div className="max-w-7xl mx-auto px-4 py-4">
           <div className="flex justify-between items-center">
             <div className="flex items-center space-x-4">
-              <div className="w-8 h-8 bg-gradient-to-r from-purple-600 to-purple-700 rounded-lg flex items-center justify-center">
+              <div className="w-8 h-8 bg-gradient-to-r from-primary-600 to-primary-700 rounded-lg flex items-center justify-center">
                 <span className="text-white font-bold text-sm">ES</span>
               </div>
               <h1 className="text-2xl font-bold text-gray-900">Admin Dashboard</h1>

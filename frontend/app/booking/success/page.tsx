@@ -63,7 +63,7 @@ export default function BookingSuccessPage() {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
         <div className="text-center">
-          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-purple-600 mx-auto"></div>
+          <div className="animate-spin rounded-full h-32 w-32 border-b-2 border-primary-600 mx-auto"></div>
           <p className="mt-4 text-gray-600">Loading booking details...</p>
         </div>
       </div>
@@ -103,15 +103,15 @@ export default function BookingSuccessPage() {
           className="bg-white rounded-2xl shadow-xl overflow-hidden mb-8"
         >
           {/* Header */}
-          <div className="bg-gradient-to-r from-purple-600 to-purple-700 text-white p-6">
+          <div className="bg-gradient-to-r from-primary-600 to-primary-700 text-white p-6">
             <div className="flex justify-between items-start">
               <div>
                 <h2 className="text-2xl font-bold mb-2">Trip Confirmation</h2>
-                <p className="text-purple-100">Booking ID: {booking.id}</p>
-                <p className="text-purple-100">Payment Reference: {booking.paymentReference}</p>
+                <p className="text-primary-100">Booking ID: {booking.id}</p>
+                <p className="text-primary-100">Payment Reference: {booking.paymentReference}</p>
               </div>
               <div className="text-right">
-                <p className="text-purple-100">Booking Date</p>
+                <p className="text-primary-100">Booking Date</p>
                 <p className="font-semibold">{new Date(booking.bookingDate).toLocaleDateString()}</p>
               </div>
             </div>
@@ -260,7 +260,7 @@ export default function BookingSuccessPage() {
                   </div>
                   <div className="border-t pt-2 flex justify-between font-bold text-lg">
                     <span>Total Paid:</span>
-                    <span className="text-purple-600">₦{booking.totalAmount.toLocaleString()}</span>
+                    <span className="text-primary-600">₦{booking.totalAmount.toLocaleString()}</span>
                   </div>
                   <div className="flex justify-between text-green-600">
                     <span>Payment Status:</span>
@@ -299,7 +299,7 @@ export default function BookingSuccessPage() {
           </button>
           <button
             onClick={() => router.push('/')}
-            className="flex items-center space-x-2 bg-purple-600 text-white px-6 py-3 rounded-lg hover:bg-purple-700 transition-colors"
+            className="flex items-center space-x-2 bg-primary-600 text-white px-6 py-3 rounded-lg hover:bg-primary-700 transition-colors"
           >
             <span>Book Another Trip</span>
           </button>
