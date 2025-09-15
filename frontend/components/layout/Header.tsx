@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion, AnimatePresence } from 'framer-motion';
 import { 
   Bars3Icon, 
@@ -77,21 +78,16 @@ const Header = () => {
               transition={{ duration: 0.5 }}
               className="flex-shrink-0"
             >
-              <Link href="/" className="flex items-center space-x-2">
-                <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">E</span>
-                </div>
-                <div className="hidden sm:block">
-                  <h1 className={`font-bold text-xl transition-colors duration-300 ${
-                    isScrolled ? 'text-gray-900' : 'text-white'
-                  }`}>
-                    Engraced
-                  </h1>
-                  <p className={`text-xs transition-colors duration-300 ${
-                    isScrolled ? 'text-gray-600' : 'text-primary-200'
-                  }`}>
-                    Smile Logistics
-                  </p>
+              <Link href="/" className="flex items-center">
+                <div className="relative w-16 h-16">
+                  <Image
+                    src="/logo.png"
+                    alt="Engraced Smile Logistics"
+                    fill
+                    className="object-contain"
+                    sizes="64px"
+                    priority
+                  />
                 </div>
               </Link>
             </motion.div>

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import Image from 'next/image';
 import { motion } from 'framer-motion';
 import { 
   PhoneIcon, 
@@ -85,13 +86,15 @@ const Footer = () => {
               transition={{ duration: 0.6 }}
               viewport={{ once: true }}
             >
-              <div className="flex items-center space-x-2 mb-6">
-                <div className="w-10 h-10 bg-primary-600 rounded-lg flex items-center justify-center">
-                  <span className="text-white font-bold text-xl">E</span>
-                </div>
-                <div>
-                  <h3 className="text-xl font-bold">Engraced</h3>
-                  <p className="text-sm text-gray-400">Smile Logistics</p>
+              <div className="flex items-center space-x-3 mb-6">
+                <div className="relative w-12 h-12">
+                  <Image
+                    src="/logo.png"
+                    alt="Engraced Smile Logistics"
+                    fill
+                    className="object-contain"
+                    sizes="48px"
+                  />
                 </div>
               </div>
               
