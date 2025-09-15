@@ -348,6 +348,179 @@ export default function BookingPage() {
           </div>
         </div>
       </section>
+
+      {/* Flight Booking Section */}
+      <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">
+                Flight Services
+              </span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Book Your Flights with Us
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Need to fly? We've got you covered! Book domestic and international flights with competitive prices 
+                and excellent service. Our flight booking service complements our transportation offerings perfectly.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">✈️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Domestic & International Flights</h3>
+                    <p className="text-sm text-gray-600">All major airlines and destinations</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">💰</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Best Price Guarantee</h3>
+                    <p className="text-sm text-gray-600">Competitive rates with instant confirmation</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">🕐</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">24/7 Booking Support</h3>
+                    <p className="text-sm text-gray-600">Round-the-clock assistance for all your needs</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg"
+                onClick={() => window.location.href = '/contact'}
+              >
+                Book Flight Now
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/flight.webp"
+                  alt="Flight booking services"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Ready to Fly?</h3>
+                  <p className="text-blue-200">Book your next adventure with us</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Logistics Section */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative order-2 lg:order-1"
+            >
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/logistics.png"
+                  alt="Logistics and cargo services"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Logistics Solutions</h3>
+                  <p className="text-green-200">Complete supply chain management</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <span className="inline-block px-4 py-2 bg-green-100 text-green-600 rounded-full text-sm font-medium mb-4">
+                Logistics Services
+              </span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Complete Logistics Solutions
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Beyond passenger transport, we offer comprehensive logistics services for cargo transportation, 
+                warehousing, and supply chain management. Perfect for businesses and individuals with shipping needs.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">📦</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Cargo Transportation</h3>
+                    <p className="text-sm text-gray-600">Safe and secure delivery across Nigeria</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">🏢</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Warehousing Solutions</h3>
+                    <p className="text-sm text-gray-600">Secure storage and inventory management</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-10 h-10 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-xl">📍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Real-time Tracking</h3>
+                    <p className="text-sm text-gray-600">Monitor your shipments every step of the way</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg"
+                onClick={() => window.location.href = '/contact'}
+              >
+                Get Logistics Quote
+              </motion.button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
       
       <Footer />
     </div>
