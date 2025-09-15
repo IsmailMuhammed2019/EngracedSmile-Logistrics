@@ -481,6 +481,197 @@ export default function HomePage() {
         </div>
       </section>
 
+            {/* Flight Booking Section */}
+            <section className="py-20 bg-gradient-to-br from-blue-50 to-indigo-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+            >
+              <span className="inline-block px-4 py-2 bg-blue-100 text-blue-600 rounded-full text-sm font-medium mb-4">
+                Flight Services
+              </span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Book Your Flights with Confidence
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Experience seamless flight booking with competitive prices and excellent service. 
+                We partner with major airlines to bring you the best deals for both domestic and international travel.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">✈️</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Domestic Flights</h3>
+                    <p className="text-sm text-gray-600">All major Nigerian cities</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">🌍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">International</h3>
+                    <p className="text-sm text-gray-600">Worldwide destinations</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">💰</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Best Prices</h3>
+                    <p className="text-sm text-gray-600">Competitive rates guaranteed</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">🕐</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">24/7 Support</h3>
+                    <p className="text-sm text-gray-600">Round-the-clock assistance</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg"
+                onClick={() => window.location.href = '/booking'}
+              >
+                Book Flight Now
+              </motion.button>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative"
+            >
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/flight.webp"
+                  alt="Flight booking services"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Ready to Fly?</h3>
+                  <p className="text-blue-200">Book your next adventure with us</p>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
+      {/* Logistics Section */}
+      <section className="py-20 bg-gradient-to-br from-green-50 to-emerald-100">
+        <div className="max-w-7xl mx-auto px-4">
+          <div className="grid lg:grid-cols-2 gap-12 items-center">
+            <motion.div
+              initial={{ opacity: 0, x: 30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="relative order-2 lg:order-1"
+            >
+              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
+                <Image
+                  src="/logistics.png"
+                  alt="Logistics and cargo services"
+                  fill
+                  className="object-cover"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h3 className="text-2xl font-bold mb-2">Logistics Solutions</h3>
+                  <p className="text-green-200">Complete supply chain management</p>
+                </div>
+              </div>
+            </motion.div>
+
+            <motion.div
+              initial={{ opacity: 0, x: -30 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.6 }}
+              viewport={{ once: true }}
+              className="order-1 lg:order-2"
+            >
+              <span className="inline-block px-4 py-2 bg-green-100 text-green-600 rounded-full text-sm font-medium mb-4">
+                Logistics Services
+              </span>
+              <h2 className="text-4xl font-bold text-gray-900 mb-6">
+                Complete Logistics Solutions
+              </h2>
+              <p className="text-lg text-gray-600 mb-8">
+                Comprehensive logistics services for cargo transportation, warehousing, and supply chain management. 
+                We handle everything from small packages to large shipments across Nigeria and beyond.
+              </p>
+              
+              <div className="grid grid-cols-2 gap-6 mb-8">
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">📦</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Cargo Transport</h3>
+                    <p className="text-sm text-gray-600">Safe and secure delivery</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">🏢</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Warehousing</h3>
+                    <p className="text-sm text-gray-600">Secure storage solutions</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">🔗</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Supply Chain</h3>
+                    <p className="text-sm text-gray-600">End-to-end management</p>
+                  </div>
+                </div>
+                <div className="flex items-center space-x-3">
+                  <div className="w-12 h-12 bg-green-100 rounded-lg flex items-center justify-center">
+                    <span className="text-2xl">📍</span>
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-gray-900">Real-time Tracking</h3>
+                    <p className="text-sm text-gray-600">Monitor your shipments</p>
+                  </div>
+                </div>
+              </div>
+
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg"
+                onClick={() => window.location.href = '/contact'}
+              >
+                Get Logistics Quote
+              </motion.button>
+            </motion.div>
+          </div>
+        </div>
+      </section>
+
       {/* About Us Section */}
       <section id="about" className="py-20 bg-white">
         <div className="max-w-7xl mx-auto px-4">
@@ -858,6 +1049,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+
 
       {/* Pricing Section */}
       <section id="pricing" className="py-20 bg-gradient-to-br from-gray-50 to-primary-50">
