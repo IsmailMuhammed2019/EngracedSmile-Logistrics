@@ -1,5 +1,5 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('next-pwa')({
+const withPWA = require('@ducanh2912/next-pwa').default({
   dest: 'public',
   register: true,
   skipWaiting: true,
@@ -32,11 +32,21 @@ const withPWA = require('next-pwa')({
 
 const nextConfig = {
   reactStrictMode: true,
-  swcMinify: true,
   images: {
-    domains: ['localhost', 'api.engraced.com', 'images.unsplash.com'],
     formats: ['image/webp', 'image/avif'],
     remotePatterns: [
+      {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '',
+        pathname: '/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'api.engraced.com',
+        port: '',
+        pathname: '/**',
+      },
       {
         protocol: 'https',
         hostname: 'images.unsplash.com',
@@ -46,8 +56,14 @@ const nextConfig = {
     ],
   },
   experimental: {
-    // appDir: true, // Removed as it's now default in Next.js 14
+    // Enable client-side router cache with staleTimes for Next.js 15
+    staleTimes: {
+      dynamic: 30,
+      static: 180,
+    },
   },
+  // Allow development origins for cross-origin requests
+  allowedDevOrigins: ['engracedsmile.com', 'localhost'],
   env: {
     CUSTOM_KEY: process.env.CUSTOM_KEY || 'default-key',
   },

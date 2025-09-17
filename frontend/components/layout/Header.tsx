@@ -1,214 +1,209 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import Link from 'next/link';
 import Image from 'next/image';
-import { motion, AnimatePresence } from 'framer-motion';
+import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { 
   Bars3Icon, 
-  XMarkIcon, 
-  UserIcon,
+  XMarkIcon,
   PhoneIcon,
   EnvelopeIcon
 } from '@heroicons/react/24/outline';
 
-const Header = () => {
-  const [isOpen, setIsOpen] = useState(false);
-  const [isScrolled, setIsScrolled] = useState(false);
+interface HeaderProps {
+  title?: string;
+  showLiveTime?: boolean;
+  variant?: 'default' | 'logistics' | 'car-booking' | 'flight-booking';
+}
 
+export default function Header({ 
+  title = "Engraced Smile Logistics", 
+  showLiveTime = false,
+  variant = 'default'
+}: HeaderProps) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [currentTime, setCurrentTime] = useState<string>('');
+  const pathname = usePathname();
+
+  // Live time update effect
   useEffect(() => {
-    const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50);
+    if (!showLiveTime) return;
+    
+    const updateTime = () => {
+      setCurrentTime(new Date().toLocaleTimeString());
     };
+    
+    updateTime();
+    const timer = setInterval(updateTime, 1000);
+    
+    return () => clearInterval(timer);
+  }, [showLiveTime]);
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  // Get variant-specific styles
+  const getVariantStyles = () => {
+    switch (variant) {
+      case 'logistics':
+        return {
+          borderColor: 'border-green-100',
+          hoverColor: 'hover:text-green-600',
+          buttonGradient: 'from-green-600 to-emerald-600 hover:from-green-700 hover:to-emerald-700'
+        };
+      case 'car-booking':
+        return {
+          borderColor: 'border-primary-100',
+          hoverColor: 'hover:text-primary-600',
+          buttonGradient: 'from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800'
+        };
+      case 'flight-booking':
+        return {
+          borderColor: 'border-blue-100',
+          hoverColor: 'hover:text-blue-600',
+          buttonGradient: 'from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800'
+        };
+      default:
+        return {
+          borderColor: 'border-primary-100',
+          hoverColor: 'hover:text-primary-600',
+          buttonGradient: 'from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800'
+        };
+    }
+  };
 
-  const navigation = [
-    { name: 'Home', href: '/' },
-    { name: 'Services', href: '/services' },
-    { name: 'About', href: '/about' },
-    { name: 'Contact', href: '/contact' },
-    { name: 'Book Now', href: '/booking', isCTA: true },
+  const styles = getVariantStyles();
+
+  const navigationItems = [
+    { href: '/', label: 'Home' },
+    { href: '/flight-booking', label: 'Flight Booking' },
+    { href: '/car-booking', label: 'Car Booking' },
+    { href: '/logistics', label: 'Logistics' },
+    { href: '/trips', label: 'Trips' },
+    { href: '/contact', label: 'Contact' }
   ];
 
-  const contactInfo = [
-    { icon: PhoneIcon, text: '+234 801 234 5678', href: 'tel:+2348012345678' },
-    { icon: EnvelopeIcon, text: 'info@engraced.com', href: 'mailto:info@engraced.com' },
-  ];
+  const isActivePath = (href: string) => {
+    if (href === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(href);
+  };
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-      isScrolled 
-        ? 'bg-white/95 backdrop-blur-md shadow-medium' 
-        : 'bg-transparent'
-    }`}>
-      {/* Top Bar */}
-      <div className={`hidden lg:block transition-all duration-300 ${
-        isScrolled ? 'h-0 overflow-hidden' : 'h-12 bg-primary-900'
-      }`}>
-        <div className="max-w-7xl mx-auto px-4 h-full flex items-center justify-between text-white text-sm">
-          <div className="flex items-center space-x-6">
-            {contactInfo.map((contact, index) => (
-              <a
-                key={index}
-                href={contact.href}
-                className="flex items-center space-x-2 hover:text-primary-200 transition-colors"
-              >
-                <contact.icon className="h-4 w-4" />
-                <span>{contact.text}</span>
-              </a>
-            ))}
-          </div>
+    <header className={`bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b ${styles.borderColor}`}>
+      <div className="max-w-7xl mx-auto px-4 py-4">
+        <div className="flex justify-between items-center">
+          {/* Logo and Title */}
           <div className="flex items-center space-x-4">
-            <span>24/7 Support Available</span>
-          </div>
-        </div>
-      </div>
-
-      {/* Main Navigation */}
-      <nav className="relative">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Logo */}
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.5 }}
-              className="flex-shrink-0"
-            >
-              <Link href="/" className="flex items-center">
-                <div className="relative w-12 h-12">
-                  <Image
-                    src="/logo.png"
-                    alt="Engraced Smile Logistics"
-                    fill
-                    className="object-contain"
-                    sizes="48px"
-                    priority
-                  />
-                </div>
-              </Link>
-            </motion.div>
-
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8">
-              {navigation.map((item, index) => (
-                <motion.div
-                  key={item.name}
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.5, delay: index * 0.1 }}
-                >
-                  <Link
-                    href={item.href}
-                    className={`relative px-3 py-2 text-sm font-medium transition-all duration-300 hover:scale-105 ${
-                      item.isCTA
-                        ? 'bg-primary-600 text-white rounded-lg hover:bg-primary-700'
-                        : isScrolled
-                        ? 'text-gray-700 hover:text-primary-600'
-                        : 'text-white hover:text-primary-200'
-                    }`}
-                  >
-                    {item.name}
-                    {!item.isCTA && (
-                      <motion.div
-                        className="absolute bottom-0 left-0 right-0 h-0.5 bg-primary-600"
-                        initial={{ scaleX: 0 }}
-                        whileHover={{ scaleX: 1 }}
-                        transition={{ duration: 0.2 }}
-                      />
-                    )}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-
-            {/* User Actions */}
-            <div className="hidden lg:flex items-center space-x-4">
-              <motion.button
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.5, delay: 0.3 }}
-                className={`p-2 rounded-lg transition-all duration-300 hover:scale-105 ${
-                  isScrolled
-                    ? 'text-gray-700 hover:bg-gray-100'
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                <UserIcon className="h-6 w-6" />
-              </motion.button>
-            </div>
-
-            {/* Mobile menu button */}
-            <div className="lg:hidden">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                onClick={() => setIsOpen(!isOpen)}
-                className={`p-2 rounded-lg transition-all duration-300 ${
-                  isScrolled
-                    ? 'text-gray-700 hover:bg-gray-100'
-                    : 'text-white hover:bg-white/10'
-                }`}
-              >
-                {isOpen ? (
-                  <XMarkIcon className="h-6 w-6" />
-                ) : (
-                  <Bars3Icon className="h-6 w-6" />
+            <div className="flex items-center space-x-3">
+              <div className="relative w-12 h-12">
+                <Image
+                  src="/logo.png"
+                  alt="Engraced Smile Logistics"
+                  fill
+                  className="object-contain"
+                  sizes="48px"
+                  priority
+                />
+              </div>
+              <div className="flex flex-col">
+                <h1 className="text-xl font-bold text-gray-900">{title}</h1>
+                {showLiveTime && (
+                  <p className="text-sm text-gray-600">
+                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                    Live: {currentTime}
+                  </p>
                 )}
-              </motion.button>
+              </div>
             </div>
           </div>
+
+          {/* Desktop Navigation */}
+          <nav className="hidden lg:flex space-x-8">
+            {navigationItems.map((item) => (
+              <Link
+                key={item.href}
+                href={item.href}
+                className={`transition-colors font-medium ${
+                  isActivePath(item.href)
+                    ? 'text-primary-600 font-semibold'
+                    : `text-gray-700 ${styles.hoverColor}`
+                }`}
+              >
+                {item.label}
+              </Link>
+            ))}
+          </nav>
+
+          {/* Contact Info and CTA */}
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex items-center space-x-4 text-sm text-gray-600">
+              <div className="flex items-center space-x-1">
+                <PhoneIcon className="w-4 h-4" />
+                <span>+234 803 123 4567</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <EnvelopeIcon className="w-4 h-4" />
+                <span>info@engracedsmile.com</span>
+              </div>
+            </div>
+            <button className={`bg-gradient-to-r ${styles.buttonGradient} text-white px-6 py-2 rounded-lg transition-all duration-300 font-medium shadow-lg`}>
+              Download App
+            </button>
+          </div>
+
+          {/* Mobile Menu Button */}
+          <button
+            className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            {isMobileMenuOpen ? (
+              <XMarkIcon className="w-6 h-6 text-gray-700" />
+            ) : (
+              <Bars3Icon className="w-6 h-6 text-gray-700" />
+            )}
+          </button>
         </div>
 
         {/* Mobile Navigation */}
-        <AnimatePresence>
-          {isOpen && (
-            <motion.div
-              initial={{ opacity: 0, height: 0 }}
-              animate={{ opacity: 1, height: 'auto' }}
-              exit={{ opacity: 0, height: 0 }}
-              transition={{ duration: 0.3 }}
-              className="lg:hidden bg-white shadow-large"
-            >
-              <div className="px-4 py-6 space-y-4">
-                {navigation.map((item) => (
-                  <Link
-                    key={item.name}
-                    href={item.href}
-                    onClick={() => setIsOpen(false)}
-                    className={`block px-3 py-2 text-base font-medium rounded-lg transition-all duration-300 ${
-                      item.isCTA
-                        ? 'bg-primary-600 text-white hover:bg-primary-700'
-                        : 'text-gray-700 hover:text-primary-600 hover:bg-gray-50'
-                    }`}
-                  >
-                    {item.name}
-                  </Link>
-                ))}
-                
-                {/* Mobile Contact Info */}
-                <div className="pt-4 border-t border-gray-200 space-y-3">
-                  {contactInfo.map((contact, index) => (
-                    <a
-                      key={index}
-                      href={contact.href}
-                      className="flex items-center space-x-3 text-gray-600 hover:text-primary-600 transition-colors"
-                    >
-                      <contact.icon className="h-5 w-5" />
-                      <span className="text-sm">{contact.text}</span>
-                    </a>
-                  ))}
+        {isMobileMenuOpen && (
+          <div className="lg:hidden mt-4 pb-4 border-t border-gray-200">
+            <nav className="flex flex-col space-y-4 pt-4">
+              {navigationItems.map((item) => (
+                <Link
+                  key={item.href}
+                  href={item.href}
+                  className={`transition-colors font-medium py-2 ${
+                    isActivePath(item.href)
+                      ? 'text-primary-600 font-semibold'
+                      : `text-gray-700 ${styles.hoverColor}`
+                  }`}
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  {item.label}
+                </Link>
+              ))}
+            </nav>
+            
+            {/* Mobile Contact Info */}
+            <div className="mt-6 pt-4 border-t border-gray-200">
+              <div className="flex flex-col space-y-3 text-sm text-gray-600">
+                <div className="flex items-center space-x-2">
+                  <PhoneIcon className="w-4 h-4" />
+                  <span>+234 803 123 4567</span>
+                </div>
+                <div className="flex items-center space-x-2">
+                  <EnvelopeIcon className="w-4 h-4" />
+                  <span>info@engracedsmile.com</span>
                 </div>
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
-      </nav>
+              <button className={`mt-4 w-full bg-gradient-to-r ${styles.buttonGradient} text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium shadow-lg`}>
+                Download App
+              </button>
+            </div>
+          </div>
+        )}
+      </div>
     </header>
   );
-};
-
-export default Header;
+}

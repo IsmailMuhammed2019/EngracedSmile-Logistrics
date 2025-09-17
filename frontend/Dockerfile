@@ -1,5 +1,5 @@
-# Use Node.js 18 Alpine as base image
-FROM node:18-alpine
+# Use Node.js 20 Alpine as base image (required for React 19 and Next.js 15)
+FROM node:20-alpine
 
 # Install curl for health checks
 RUN apk add --no-cache curl
@@ -10,8 +10,8 @@ WORKDIR /app
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm install
+# Install dependencies with legacy peer deps to handle React 19 compatibility
+RUN npm install --legacy-peer-deps
 
 # Copy source code
 COPY . .

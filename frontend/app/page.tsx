@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import BookingForm from '@/components/booking/BookingForm';
+import Header from '@/components/layout/Header';
 import Image from 'next/image';
 
 export default function HomePage() {
@@ -11,6 +12,7 @@ export default function HomePage() {
   const [isClient, setIsClient] = useState(false);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
   const [imageLoadErrors, setImageLoadErrors] = useState<boolean[]>(new Array(4).fill(false));
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   // Comprehensive transportation hero images
   const heroImages = [
@@ -81,43 +83,11 @@ export default function HomePage() {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary-50">
-      {/* Enhanced Header with Live Time */}
-      <header className="bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b border-primary-100">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-3">
-                <div className="relative w-12 h-12">
-                  <Image
-                    src="/logo.png"
-                    alt="Engraced Smile Logistics"
-                    fill
-                    className="object-contain"
-                    sizes="48px"
-                    priority
-                  />
-                </div>
-              </div>
-              <div className="hidden md:flex items-center space-x-2 text-sm text-gray-600">
-                <span>🕐</span>
-                <span>{isClient ? currentTime : '--:--:--'}</span>
-              </div>
-            </div>
-            <nav className="hidden md:flex space-x-8">
-              <a href="/services" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Services</a>
-              <a href="/booking" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Book Now</a>
-              <a href="/about" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">About</a>
-              <a href="/contact" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Contact</a>
-              <a href="#pricing" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Pricing</a>
-            </nav>
-            <div className="flex items-center space-x-4">
-              <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-6 py-2 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-all duration-300 font-medium shadow-lg">
-                Download App
-              </button>
-            </div>
-          </div>
-        </div>
-      </header>
+      <Header 
+        title="Engraced Smile Logistics" 
+        showLiveTime={true}
+        variant="default"
+      />
       
       {/* Professional Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
@@ -541,14 +511,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg"
-                onClick={() => window.location.href = '/booking'}
-              >
-                Book Flight Now
-              </motion.button>
+               <motion.button
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 className="bg-gradient-to-r from-blue-600 to-indigo-600 text-white px-8 py-4 rounded-lg hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 font-semibold shadow-lg"
+                 onClick={() => window.location.href = '/flight-booking'}
+               >
+                 Book Flight Now
+               </motion.button>
             </motion.div>
 
             <motion.div
@@ -659,14 +629,14 @@ export default function HomePage() {
                 </div>
               </div>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg"
-                onClick={() => window.location.href = '/contact'}
-              >
-                Get Logistics Quote
-              </motion.button>
+               <motion.button
+                 whileHover={{ scale: 1.05 }}
+                 whileTap={{ scale: 0.95 }}
+                 className="bg-gradient-to-r from-green-600 to-emerald-600 text-white px-8 py-4 rounded-lg hover:from-green-700 hover:to-emerald-700 transition-all duration-300 font-semibold shadow-lg"
+                 onClick={() => window.location.href = '/logistics'}
+               >
+                 Get Logistics Quote
+               </motion.button>
             </motion.div>
           </div>
         </div>
