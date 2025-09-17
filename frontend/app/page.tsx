@@ -10,7 +10,7 @@ export default function HomePage() {
   const [currentTime, setCurrentTime] = useState<string>('');
   const [isClient, setIsClient] = useState(false);
   const [currentHeroImage, setCurrentHeroImage] = useState(0);
-  const [imageLoadErrors, setImageLoadErrors] = useState<boolean[]>([]);
+  const [imageLoadErrors, setImageLoadErrors] = useState<boolean[]>(new Array(4).fill(false));
 
   // Comprehensive transportation hero images
   const heroImages = [
@@ -44,6 +44,8 @@ export default function HomePage() {
     
     // Preload hero images
     const preloadImages = async () => {
+      if (typeof window === 'undefined') return;
+      
       const imagePromises = heroImages.map((image) => {
         return new Promise((resolve, reject) => {
           const img = new window.Image();
@@ -96,12 +98,10 @@ export default function HomePage() {
                   />
                 </div>
               </div>
-              {isClient && (
-                <div className="hidden md:flex items-center space-x-2 text-sm text-gray-600">
-                  <span>🕐</span>
-                  <span>{currentTime}</span>
-                </div>
-              )}
+              <div className="hidden md:flex items-center space-x-2 text-sm text-gray-600">
+                <span>🕐</span>
+                <span>{isClient ? currentTime : '--:--:--'}</span>
+              </div>
             </div>
             <nav className="hidden md:flex space-x-8">
               <a href="/services" className="text-gray-700 hover:text-primary-600 transition-colors font-medium">Services</a>
@@ -136,7 +136,7 @@ export default function HomePage() {
                 }}
                 transition={{ duration: 1.5, ease: "easeInOut" }}
               >
-                {imageLoadErrors[index] ? (
+                {isClient && imageLoadErrors[index] ? (
                   // Fallback placeholder for failed images
                   <div className="w-full h-full bg-gradient-to-br from-gray-700 to-gray-800 flex items-center justify-center">
                     <div className="text-center text-white">
@@ -169,7 +169,7 @@ export default function HomePage() {
             ))}
             
             {/* Loading indicator for first load */}
-            {!isLoaded && (
+            {!isLoaded && isClient && (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-white text-center">
                   <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-white mx-auto mb-4"></div>
@@ -214,7 +214,7 @@ export default function HomePage() {
 
           <motion.div
             initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: isLoaded ? 1 : 0, y: isLoaded ? 0 : 30 }}
+            animate={{ opacity: isClient && isLoaded ? 1 : 0, y: isClient && isLoaded ? 0 : 30 }}
             transition={{ duration: 0.8 }}
             className="max-w-4xl mx-auto"
           >
@@ -559,12 +559,12 @@ export default function HomePage() {
               className="relative"
             >
               <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/flight.webp"
-                  alt="Flight booking services"
-                  fill
-                  className="object-cover"
-                />
+                 <Image
+                   src="/flight.jpg"
+                   alt="Flight booking services"
+                   fill
+                   className="object-cover"
+                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Ready to Fly?</h3>
@@ -588,12 +588,12 @@ export default function HomePage() {
               className="relative order-2 lg:order-1"
             >
               <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/logistics.png"
-                  alt="Logistics and cargo services"
-                  fill
-                  className="object-cover"
-                />
+                 <Image
+                   src="/logistics.jpg"
+                   alt="Logistics and cargo services"
+                   fill
+                   className="object-cover"
+                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
                 <div className="absolute bottom-6 left-6 text-white">
                   <h3 className="text-2xl font-bold mb-2">Logistics Solutions</h3>
