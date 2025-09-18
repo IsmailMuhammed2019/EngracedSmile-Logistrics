@@ -20,7 +20,18 @@ export default function CarBookingPage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-primary-600 to-primary-800">
+      <section className="relative py-20 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/cars.jpg"
+            alt="Premium vehicle transportation services"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 via-primary-800/70 to-primary-900/80"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div

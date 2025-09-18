@@ -6,9 +6,7 @@ import Link from 'next/link';
 import { usePathname } from 'next/navigation';
 import { 
   Bars3Icon, 
-  XMarkIcon,
-  PhoneIcon,
-  EnvelopeIcon
+  XMarkIcon
 } from '@heroicons/react/24/outline';
 
 interface HeaderProps {
@@ -92,29 +90,24 @@ export default function Header({
     <header className={`bg-white/95 backdrop-blur-sm shadow-lg sticky top-0 z-50 border-b ${styles.borderColor}`}>
       <div className="max-w-7xl mx-auto px-4 py-4">
         <div className="flex justify-between items-center">
-          {/* Logo and Title */}
+          {/* Logo */}
           <div className="flex items-center space-x-4">
-            <div className="flex items-center space-x-3">
-              <div className="relative w-12 h-12">
-                <Image
-                  src="/logo.png"
-                  alt="Engraced Smile Logistics"
-                  fill
-                  className="object-contain"
-                  sizes="48px"
-                  priority
-                />
-              </div>
-              <div className="flex flex-col">
-                <h1 className="text-xl font-bold text-gray-900">{title}</h1>
-                {showLiveTime && (
-                  <p className="text-sm text-gray-600">
-                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
-                    Live: {currentTime}
-                  </p>
-                )}
-              </div>
+            <div className="relative w-12 h-12">
+              <Image
+                src="/logo.png"
+                alt="Engraced Smile Logistics"
+                fill
+                className="object-contain"
+                sizes="48px"
+                priority
+              />
             </div>
+            {showLiveTime && (
+              <div className="flex items-center text-sm text-gray-600">
+                <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2 animate-pulse"></span>
+                Live: {currentTime}
+              </div>
+            )}
           </div>
 
           {/* Desktop Navigation */}
@@ -134,18 +127,8 @@ export default function Header({
             ))}
           </nav>
 
-          {/* Contact Info and CTA */}
-          <div className="hidden md:flex items-center space-x-6">
-            <div className="flex items-center space-x-4 text-sm text-gray-600">
-              <div className="flex items-center space-x-1">
-                <PhoneIcon className="w-4 h-4" />
-                <span>+234 803 123 4567</span>
-              </div>
-              <div className="flex items-center space-x-1">
-                <EnvelopeIcon className="w-4 h-4" />
-                <span>info@engracedsmile.com</span>
-              </div>
-            </div>
+          {/* CTA Button */}
+          <div className="hidden md:flex items-center">
             <button className={`bg-gradient-to-r ${styles.buttonGradient} text-white px-6 py-2 rounded-lg transition-all duration-300 font-medium shadow-lg`}>
               Download App
             </button>
@@ -185,19 +168,9 @@ export default function Header({
               ))}
             </nav>
             
-            {/* Mobile Contact Info */}
+            {/* Mobile CTA Button */}
             <div className="mt-6 pt-4 border-t border-gray-200">
-              <div className="flex flex-col space-y-3 text-sm text-gray-600">
-                <div className="flex items-center space-x-2">
-                  <PhoneIcon className="w-4 h-4" />
-                  <span>+234 803 123 4567</span>
-                </div>
-                <div className="flex items-center space-x-2">
-                  <EnvelopeIcon className="w-4 h-4" />
-                  <span>info@engracedsmile.com</span>
-                </div>
-              </div>
-              <button className={`mt-4 w-full bg-gradient-to-r ${styles.buttonGradient} text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium shadow-lg`}>
+              <button className={`w-full bg-gradient-to-r ${styles.buttonGradient} text-white px-6 py-3 rounded-lg transition-all duration-300 font-medium shadow-lg`}>
                 Download App
               </button>
             </div>

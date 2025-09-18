@@ -1,9 +1,9 @@
 /** @type {import('next').NextConfig} */
-const withPWA = require('@ducanh2912/next-pwa').default({
+const withPWA = require('next-pwa')({
   dest: 'public',
   register: true,
   skipWaiting: true,
-  disable: false, // Enable PWA in development
+  disable: process.env.NODE_ENV === 'development',
   runtimeCaching: [
     {
       urlPattern: /^https:\/\/api\./,
@@ -61,6 +61,8 @@ const nextConfig = {
       dynamic: 30,
       static: 180,
     },
+    // Ensure React 18 compatibility
+    reactCompiler: false,
   },
   // Allow development origins for cross-origin requests
   allowedDevOrigins: ['engracedsmile.com', 'localhost'],

@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import Header from '@/components/layout/Header';
+import FlightSearch from '@/components/flight/FlightSearch';
 import Image from 'next/image';
 
 export default function FlightBookingPage() {
@@ -20,7 +21,18 @@ export default function FlightBookingPage() {
       />
 
       {/* Hero Section */}
-      <section className="py-20 bg-gradient-to-br from-blue-600 to-indigo-800">
+      <section className="relative py-20 overflow-hidden">
+        {/* Background Image */}
+        <div className="absolute inset-0">
+          <Image
+            src="/plane.jpg"
+            alt="Flight booking services"
+            fill
+            className="object-cover"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-900/80 via-blue-800/70 to-indigo-900/80"></div>
+        </div>
         <div className="max-w-7xl mx-auto px-4">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -112,117 +124,9 @@ export default function FlightBookingPage() {
         </div>
       </section>
 
-      {/* Flight Booking Form */}
-      <section className="py-20 bg-white">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Book Your Flight
-            </h2>
-            <p className="text-xl text-gray-600">
-              Fill in your travel details and we'll find the best flight options for you
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
-          >
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">From</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>Select departure city</option>
-                    <option>Lagos (LOS)</option>
-                    <option>Abuja (ABV)</option>
-                    <option>Kano (KAN)</option>
-                    <option>Port Harcourt (PHC)</option>
-                    <option>Enugu (ENU)</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">To</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>Select destination city</option>
-                    <option>Lagos (LOS)</option>
-                    <option>Abuja (ABV)</option>
-                    <option>Kano (KAN)</option>
-                    <option>Port Harcourt (PHC)</option>
-                    <option>Enugu (ENU)</option>
-                    <option>London (LHR)</option>
-                    <option>New York (JFK)</option>
-                    <option>Dubai (DXB)</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Departure Date</label>
-                  <input 
-                    type="date" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Return Date</label>
-                  <input 
-                    type="date" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>1 Passenger</option>
-                    <option>2 Passengers</option>
-                    <option>3 Passengers</option>
-                    <option>4 Passengers</option>
-                    <option>5+ Passengers</option>
-                  </select>
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Trip Type</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>Round Trip</option>
-                    <option>One Way</option>
-                    <option>Multi City</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Class</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent">
-                    <option>Economy</option>
-                    <option>Business</option>
-                    <option>First Class</option>
-                  </select>
-                </div>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full bg-gradient-to-r from-blue-600 to-indigo-600 text-white py-4 rounded-lg font-semibold hover:from-blue-700 hover:to-indigo-700 transition-all duration-300 shadow-lg"
-              >
-                Search Flights
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
+      {/* Flight Search Section */}
+      <section className="py-20 bg-gray-50">
+        <FlightSearch />
       </section>
 
       {/* Popular Destinations */}
@@ -245,12 +149,12 @@ export default function FlightBookingPage() {
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
-              { city: "Lagos", country: "Nigeria", price: "From ₦25,000", image: "/flight.jpg" },
-              { city: "Abuja", country: "Nigeria", price: "From ₦30,000", image: "/flight.jpg" },
-              { city: "London", country: "United Kingdom", price: "From ₦450,000", image: "/flight.jpg" },
-              { city: "New York", country: "United States", price: "From ₦650,000", image: "/flight.jpg" },
-              { city: "Dubai", country: "UAE", price: "From ₦350,000", image: "/flight.jpg" },
-              { city: "Paris", country: "France", price: "From ₦500,000", image: "/flight.jpg" }
+              { city: "Lagos", country: "Nigeria", price: "From ₦65,000", image: "/flight.jpg" },
+              { city: "Abuja", country: "Nigeria", price: "From ₦75,000", image: "/flight.jpg" },
+              { city: "London", country: "United Kingdom", price: "From ₦680,000", image: "/flight.jpg" },
+              { city: "New York", country: "United States", price: "From ₦850,000", image: "/flight.jpg" },
+              { city: "Dubai", country: "UAE", price: "From ₦520,000", image: "/flight.jpg" },
+              { city: "Paris", country: "France", price: "From ₦720,000", image: "/flight.jpg" }
             ].map((destination, index) => (
               <motion.div
                 key={index}
