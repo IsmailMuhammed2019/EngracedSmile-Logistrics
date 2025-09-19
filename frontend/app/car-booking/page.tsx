@@ -24,7 +24,7 @@ export default function CarBookingPage() {
         {/* Background Image */}
         <div className="absolute inset-0">
           <Image
-            src="/cars.jpg"
+            src="/carslon.jpg"
             alt="Premium vehicle transportation services"
             fill
             className="object-cover"
@@ -108,7 +108,7 @@ export default function CarBookingPage() {
             >
               <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
                 <Image
-                  src="/cars.jpg"
+                  src="/rent.jpg"
                   alt="Premium vehicle transportation services"
                   fill
                   className="object-cover"

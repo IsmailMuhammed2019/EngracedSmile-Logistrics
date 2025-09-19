@@ -8,7 +8,14 @@ module.exports = {
   theme: {
     extend: {
       colors: {
+        border: "hsl(var(--border))",
+        input: "hsl(var(--input))",
+        ring: "hsl(var(--ring))",
+        background: "hsl(var(--background))",
+        foreground: "hsl(var(--foreground))",
         primary: {
+          DEFAULT: "hsl(var(--primary))",
+          foreground: "hsl(var(--primary-foreground))",
           50: '#fefcf7',
           100: '#fdf7e8',
           200: '#fbedc4',
@@ -22,6 +29,8 @@ module.exports = {
           950: '#33260c',
         },
         secondary: {
+          DEFAULT: "hsl(var(--secondary))",
+          foreground: "hsl(var(--secondary-foreground))",
           50: '#fefcf7',
           100: '#fdf7e8',
           200: '#fbedc4',
@@ -34,7 +43,17 @@ module.exports = {
           900: '#41320f',
           950: '#33260c',
         },
+        destructive: {
+          DEFAULT: "hsl(var(--destructive))",
+          foreground: "hsl(var(--destructive-foreground))",
+        },
+        muted: {
+          DEFAULT: "hsl(var(--muted))",
+          foreground: "hsl(var(--muted-foreground))",
+        },
         accent: {
+          DEFAULT: "hsl(var(--accent))",
+          foreground: "hsl(var(--accent-foreground))",
           50: '#fefcf7',
           100: '#fdf7e8',
           200: '#fbedc4',
@@ -46,6 +65,14 @@ module.exports = {
           800: '#4f3e12',
           900: '#41320f',
           950: '#33260c',
+        },
+        popover: {
+          DEFAULT: "hsl(var(--popover))",
+          foreground: "hsl(var(--popover-foreground))",
+        },
+        card: {
+          DEFAULT: "hsl(var(--card))",
+          foreground: "hsl(var(--card-foreground))",
         },
         purple: {
           50: '#faf7ff',
