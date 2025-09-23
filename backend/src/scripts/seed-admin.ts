@@ -1,7 +1,7 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from '../app.module';
 import { UsersService } from '../users/users.service';
-import { UserRole } from '../users/entities/user.entity';
+import * as bcrypt from 'bcryptjs';
 
 async function seedAdmin() {
   const app = await NestFactory.createApplicationContext(AppModule);
@@ -12,27 +12,26 @@ async function seedAdmin() {
     const existingAdmin = await usersService.findByEmail('admin@engraced.com');
     
     if (existingAdmin) {
-      console.log('✅ Admin user already exists');
+      console.log('Admin user already exists');
       return;
     }
 
     // Create admin user
-    const adminUser = await usersService.create({
+    const adminData = {
       email: 'admin@engraced.com',
       password: 'admin123',
       firstName: 'Admin',
       lastName: 'User',
-      role: UserRole.ADMIN,
-      phone: '+234 801 234 5678',
-    });
+      phone: '+234 800 000 0000',
+      role: 'ADMIN' as any,
+      isActive: true,
+      isEmailVerified: true,
+    };
 
-    console.log('✅ Admin user created successfully');
-    console.log('📧 Email: admin@engraced.com');
-    console.log('🔑 Password: admin123');
-    console.log('🆔 User ID:', adminUser.id);
-    
+    const admin = await usersService.create(adminData);
+    console.log('Admin user created successfully:', admin.email);
   } catch (error) {
-    console.error('❌ Error creating admin user:', error.message);
+    console.error('Error creating admin user:', error);
   } finally {
     await app.close();
   }

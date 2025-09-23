@@ -2,7 +2,6 @@
 
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
 import { 
   Menu, 
   X, 
@@ -213,12 +212,9 @@ export default function CarBookingsManagement() {
         <nav className="mt-8 px-4">
           <div className="space-y-2">
             {sidebarItems.map((item, index) => (
-              <motion.a
+              <a
                 key={item.label}
                 href={item.href}
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: index * 0.1 }}
                 className={`flex items-center px-4 py-3 text-sm font-medium rounded-lg transition-colors ${
                   item.active
                     ? 'bg-primary-100 text-primary-700 border-r-2 border-primary-600'
@@ -227,7 +223,7 @@ export default function CarBookingsManagement() {
               >
                 <item.icon className="mr-3 h-5 w-5" />
                 {item.label}
-              </motion.a>
+              </a>
             ))}
           </div>
         </nav>
@@ -423,11 +419,8 @@ export default function CarBookingsManagement() {
                 </TableHeader>
                 <TableBody>
                   {filteredBookings.map((booking, index) => (
-                    <motion.tr
+                    <tr
                       key={booking.id}
-                      initial={{ opacity: 0, y: 20 }}
-                      animate={{ opacity: 1, y: 0 }}
-                      transition={{ delay: index * 0.05 }}
                       className="hover:bg-gray-50"
                     >
                       <TableCell className="font-medium">{booking.id}</TableCell>
@@ -469,7 +462,7 @@ export default function CarBookingsManagement() {
                           </Button>
                         </div>
                       </TableCell>
-                    </motion.tr>
+                    </tr>
                   ))}
                 </TableBody>
               </Table>

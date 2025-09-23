@@ -1,412 +1,412 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion } from 'framer-motion';
-import Header from '@/components/layout/Header';
-import Image from 'next/image';
+import { useRouter, useSearchParams } from 'next/navigation';
+import {
+  Box,
+  Container,
+  Grid,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  Text,
+  Button,
+  VStack,
+  HStack,
+  Icon,
+  useColorModeValue,
+  Spinner,
+  Center,
+  Badge,
+  Image,
+  Input,
+  FormControl,
+  FormLabel,
+  InputGroup,
+  InputLeftElement,
+  NumberInput,
+  NumberInputField,
+  NumberInputStepper,
+  NumberIncrementStepper,
+  NumberDecrementStepper,
+  useToast,
+  Divider,
+} from '@chakra-ui/react';
+import {
+  FiMapPin,
+  FiCalendar,
+  FiUsers,
+  FiSearch,
+  FiClock,
+} from 'react-icons/fi';
+
+interface Vehicle {
+  id: string;
+  name: string;
+  description: string;
+  type: string;
+  capacity: number;
+  pricePerTrip: number;
+  features: string[];
+  images: string[];
+  isAvailable: boolean;
+  rating: number;
+  driver?: {
+    id: string;
+    firstName: string;
+    lastName: string;
+    rating: number;
+  };
+  routes?: Route[];
+}
+
+interface Route {
+  id: string;
+  name: string;
+  departureCity: string;
+  arrivalCity: string;
+  departureTime: string;
+  arrivalTime?: string;
+  price: number;
+  distance?: number;
+  estimatedDuration?: number;
+  isAvailable: boolean;
+}
 
 export default function CarBookingPage() {
-  const [isClient, setIsClient] = useState(false);
+  const [loading, setLoading] = useState(true);
+  const [vehicles, setVehicles] = useState<Vehicle[]>([]);
+  const [filteredVehicles, setFilteredVehicles] = useState<Vehicle[]>([]);
+  const [searchParams, setSearchParams] = useState({
+    from: '',
+    to: '',
+    date: '',
+    passengers: 1,
+  });
+  const router = useRouter();
+  const urlSearchParams = useSearchParams();
+  const toast = useToast();
+
+  const bg = 'gray.50';
+  const cardBg = 'white';
 
   useEffect(() => {
-    setIsClient(true);
-  }, []);
+    const from = urlSearchParams.get('from') || '';
+    const to = urlSearchParams.get('to') || '';
+    const date = urlSearchParams.get('date') || '';
+    const passengers = parseInt(urlSearchParams.get('passengers') || '1');
+
+    setSearchParams({ from, to, date, passengers });
+    fetchVehicles();
+  }, [urlSearchParams]);
+
+  const fetchVehicles = async () => {
+    try {
+      const mockVehicles: Vehicle[] = [
+        {
+          id: '1',
+          name: 'Toyota Sienna Standard',
+          description: 'Comfortable inter-state transportation with modern amenities',
+          type: 'sienna',
+          capacity: 8,
+          pricePerTrip: 5000,
+          features: ['Air Conditioning', 'WiFi', 'Comfortable Seats'],
+          images: ['/sienna.jpg'],
+          isAvailable: true,
+          rating: 4.5,
+          driver: {
+            id: '1',
+            firstName: 'John',
+            lastName: 'Doe',
+            rating: 4.8,
+          },
+          routes: [
+            {
+              id: '1',
+              name: 'Lagos to Abuja',
+              departureCity: 'Lagos',
+              arrivalCity: 'Abuja',
+              departureTime: '08:00',
+              arrivalTime: '14:00',
+              price: 5000,
+              distance: 750,
+              estimatedDuration: 360,
+              isAvailable: true,
+            },
+          ],
+        },
+        {
+          id: '2',
+          name: 'Toyota Sienna Executive',
+          description: 'Premium inter-state transportation with luxury features',
+          type: 'sienna_executive',
+          capacity: 8,
+          pricePerTrip: 12000,
+          features: ['Premium Interior', 'Enhanced AC', 'Leather Seats'],
+          images: ['/sienna2.jpg'],
+          isAvailable: true,
+          rating: 4.8,
+          driver: {
+            id: '2',
+            firstName: 'Jane',
+            lastName: 'Smith',
+            rating: 4.9,
+          },
+          routes: [
+            {
+              id: '2',
+              name: 'Lagos to Abuja Executive',
+              departureCity: 'Lagos',
+              arrivalCity: 'Abuja',
+              departureTime: '10:00',
+              arrivalTime: '16:00',
+              price: 12000,
+              distance: 750,
+              estimatedDuration: 360,
+              isAvailable: true,
+            },
+          ],
+        },
+      ];
+      setVehicles(mockVehicles);
+      setFilteredVehicles(mockVehicles);
+    } catch (error) {
+      toast({
+        title: 'Error',
+        description: 'Failed to fetch vehicles',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleSearch = () => {
+    let filtered = vehicles;
+
+    if (searchParams.from && searchParams.to) {
+      filtered = vehicles.filter(vehicle =>
+        vehicle.routes?.some(route =>
+          route.departureCity.toLowerCase().includes(searchParams.from.toLowerCase()) &&
+          route.arrivalCity.toLowerCase().includes(searchParams.to.toLowerCase())
+        )
+      );
+    }
+
+    if (searchParams.passengers) {
+      filtered = filtered.filter(vehicle => vehicle.capacity >= searchParams.passengers);
+    }
+
+    setFilteredVehicles(filtered);
+  };
+
+  const handleVehicleSelect = (vehicle: Vehicle, route: Route) => {
+    const params = new URLSearchParams({
+      vehicleId: vehicle.id,
+      routeId: route.id,
+      from: searchParams.from,
+      to: searchParams.to,
+      date: searchParams.date,
+      passengers: searchParams.passengers.toString(),
+    });
+    router.push(`/car-booking/details?${params.toString()}`);
+  };
+
+  if (loading) {
+    return (
+      <Center h="100vh">
+        <Spinner size="xl" color="primary.500" />
+      </Center>
+    );
+  }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 via-white to-primary-50">
-      <Header 
-        title="Car Booking" 
-        variant="car-booking"
-      />
-
-      {/* Hero Section */}
-      <section className="relative py-20 overflow-hidden">
-        {/* Background Image */}
-        <div className="absolute inset-0">
-          <Image
-            src="/carslon.jpg"
-            alt="Premium vehicle transportation services"
-            fill
-            className="object-cover"
-            priority
-          />
-          <div className="absolute inset-0 bg-gradient-to-r from-primary-900/80 via-primary-800/70 to-primary-900/80"></div>
-        </div>
-        <div className="relative max-w-7xl mx-auto px-4 z-30">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <motion.div
-              initial={{ opacity: 0, x: -30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative z-40"
-            >
-              <span className="inline-block px-4 py-2 bg-white/10 backdrop-blur-sm rounded-full text-sm font-medium mb-4 border border-white/20">
-                🚐 Vehicle Services
-              </span>
-              <h1 className="text-4xl md:text-6xl font-bold text-white mb-6">
-                Premium Vehicle Transportation
-              </h1>
-              <p className="text-lg text-primary-100 mb-8">
-                Experience comfortable and reliable transportation with our fleet of modern Sienna vehicles. 
-                Professional drivers, real-time tracking, and exceptional service for all your travel needs.
-              </p>
-              
-              <div className="grid grid-cols-2 gap-6 mb-8">
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">🚐</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Modern Fleet</h3>
-                    <p className="text-sm text-primary-200">Well-maintained Sienna vehicles</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">👨‍✈️</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Expert Drivers</h3>
-                    <p className="text-sm text-primary-200">Professional and experienced</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">📍</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Real-time Tracking</h3>
-                    <p className="text-sm text-primary-200">Monitor your journey live</p>
-                  </div>
-                </div>
-                <div className="flex items-center space-x-3">
-                  <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center">
-                    <span className="text-2xl">🛡️</span>
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-white">Safety First</h3>
-                    <p className="text-sm text-primary-200">Rigorous safety protocols</p>
-                  </div>
-                </div>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
-                className="bg-white text-primary-600 hover:bg-primary-50 px-8 py-4 rounded-lg font-semibold transition-all duration-300 shadow-lg"
-                onClick={() => window.location.href = '/booking'}
-              >
-                Book Vehicle Now
-              </motion.button>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 30 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.6 }}
-              className="relative z-40"
-            >
-              <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl">
-                <Image
-                  src="/rent.jpg"
-                  alt="Premium vehicle transportation services"
-                  fill
-                  className="object-cover"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                <div className="absolute bottom-6 left-6 text-white">
-                  <h3 className="text-2xl font-bold mb-2">Ready to Travel?</h3>
-                  <p className="text-primary-200">Book your comfortable journey with us</p>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-        </div>
-      </section>
-
-      {/* Vehicle Fleet Showcase */}
-      <section className="py-20 bg-white">
-        <div className="max-w-7xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-16"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our Vehicle Fleet
-            </h2>
-            <p className="text-xl text-gray-600">
-              Choose from our carefully maintained fleet of modern vehicles
-            </p>
-          </motion.div>
-
-          <div className="grid lg:grid-cols-3 gap-8">
-            {[
-              {
-                title: "Toyota Sienna",
-                subtitle: "Inter-State Travel",
-                price: "₦5,000",
-                period: "per trip",
-                capacity: "8 passengers",
-                features: ["Air Conditioning", "WiFi Connectivity", "Entertainment System", "Professional Driver", "Luggage Space"],
-                badge: "Most Popular",
-                image: "/sienna.jpg"
-              },
-              {
-                title: "Toyota Sienna Executive",
-                subtitle: "Premium Inter-State",
-                price: "₦12,000",
-                period: "per trip",
-                capacity: "8 passengers",
-                features: ["Premium Interior", "Enhanced AC", "Leather Seats", "Professional Service", "Extra Comfort"],
-                badge: "Executive",
-                image: "/sienna2.jpg"
-              },
-              {
-                title: "Toyota Sienna VIP",
-                subtitle: "Luxury Experience",
-                price: "₦18,000",
-                period: "per trip",
-                capacity: "7 passengers",
-                features: ["VIP Interior", "Captain Chairs", "Premium Service", "Entertainment Suite", "Maximum Comfort"],
-                badge: "Premium",
-                image: "/sienna3.jpg"
-              }
-            ].map((vehicle, index) => (
-              <motion.div
-                key={vehicle.title}
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.6, delay: index * 0.1 }}
-                viewport={{ once: true }}
-                className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2 border border-gray-100"
-              >
-                <div className="relative h-64 bg-gradient-to-br from-gray-200 to-gray-300 overflow-hidden">
-                  <Image
-                    src={vehicle.image}
-                    alt={vehicle.title}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
+    <Box bg={bg} minH="100vh" py={8}>
+      <Container maxW="container.xl">
+        <Card bg={cardBg} mb={8}>
+          <CardHeader>
+            <Heading size="md">Search for Your Perfect Ride</Heading>
+            <Text color="gray.600">Find the best Sienna vehicle for your journey</Text>
+          </CardHeader>
+          <CardBody>
+            <Grid templateColumns={{ base: '1fr', md: 'repeat(2, 1fr)', lg: 'repeat(4, 1fr)' }} gap={4}>
+              <FormControl>
+                <FormLabel>From</FormLabel>
+                <InputGroup>
+                  <InputLeftElement>
+                    <Icon as={FiMapPin} color="gray.400" />
+                  </InputLeftElement>
+                  <Input
+                    placeholder="Departure city"
+                    value={searchParams.from}
+                    onChange={(e) => setSearchParams({ ...searchParams, from: e.target.value })}
                   />
-                  
-                  <div className="absolute top-4 left-4">
-                    <span className="px-3 py-1 bg-primary-600 text-white text-xs font-semibold rounded-full">
-                      {vehicle.badge}
-                    </span>
-                  </div>
-                  
-                  <div className="absolute top-4 right-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-1">
-                    <span className="text-xs font-medium text-gray-700">{vehicle.capacity}</span>
-                  </div>
-                </div>
-
-                <div className="p-8">
-                  <div className="mb-6">
-                    <h3 className="text-2xl font-bold text-gray-900 mb-1">{vehicle.title}</h3>
-                    <p className="text-primary-600 font-medium">{vehicle.subtitle}</p>
-                  </div>
-
-                  <ul className="space-y-3 mb-8">
-                    {vehicle.features.map((feature, idx) => (
-                      <li key={idx} className="flex items-center text-sm text-gray-600">
-                        <div className="w-5 h-5 bg-green-100 rounded-full flex items-center justify-center mr-3 flex-shrink-0">
-                          <svg className="w-3 h-3 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                          </svg>
-                        </div>
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <span className="text-2xl font-bold text-gray-900">{vehicle.price}</span>
-                      <span className="text-gray-500 ml-1">/{vehicle.period}</span>
-                    </div>
-                    <motion.button
-                      whileHover={{ scale: 1.05 }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-6 py-2 bg-primary-600 hover:bg-primary-700 text-white rounded-lg font-medium transition-colors"
-                      onClick={() => window.location.href = '/booking'}
-                    >
-                      Book Now
-                    </motion.button>
-                  </div>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Booking Form */}
-      <section className="py-20 bg-gray-50">
-        <div className="max-w-4xl mx-auto px-4">
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-            viewport={{ once: true }}
-            className="text-center mb-12"
-          >
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Book Your Vehicle
-            </h2>
-            <p className="text-xl text-gray-600">
-              Fill in your travel details and we'll arrange the perfect vehicle for you
-            </p>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
-            viewport={{ once: true }}
-            className="bg-white rounded-2xl shadow-xl p-8 border border-gray-100"
-          >
-            <form className="space-y-6">
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Pickup Location</label>
-                  <input 
-                    type="text" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Enter pickup address"
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <FormLabel>To</FormLabel>
+                <InputGroup>
+                  <InputLeftElement>
+                    <Icon as={FiMapPin} color="gray.400" />
+                  </InputLeftElement>
+                  <Input
+                    placeholder="Destination city"
+                    value={searchParams.to}
+                    onChange={(e) => setSearchParams({ ...searchParams, to: e.target.value })}
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Destination</label>
-                  <input 
-                    type="text" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                    placeholder="Enter destination address"
-                  />
-                </div>
-              </div>
-
-              <div className="grid md:grid-cols-3 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Pickup Date</label>
-                  <input 
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Date</FormLabel>
+                <InputGroup>
+                  <InputLeftElement>
+                    <Icon as={FiCalendar} color="gray.400" />
+                  </InputLeftElement>
+                  <Input
                     type="date" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
+                    value={searchParams.date}
+                    onChange={(e) => setSearchParams({ ...searchParams, date: e.target.value })}
                   />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Pickup Time</label>
-                  <input 
-                    type="time" 
-                    className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Passengers</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                    <option>1 Passenger</option>
-                    <option>2 Passengers</option>
-                    <option>3 Passengers</option>
-                    <option>4 Passengers</option>
-                    <option>5 Passengers</option>
-                    <option>6 Passengers</option>
-                    <option>7 Passengers</option>
-                    <option>8 Passengers</option>
-                  </select>
-                </div>
-              </div>
+                </InputGroup>
+              </FormControl>
+              <FormControl>
+                <FormLabel>Passengers</FormLabel>
+                <NumberInput
+                  min={1}
+                  max={8}
+                  value={searchParams.passengers}
+                  onChange={(value) => setSearchParams({ ...searchParams, passengers: parseInt(value) })}
+                >
+                  <NumberInputField />
+                  <NumberInputStepper>
+                    <NumberIncrementStepper />
+                    <NumberDecrementStepper />
+                  </NumberInputStepper>
+                </NumberInput>
+              </FormControl>
+            </Grid>
+            <Button
+              colorScheme="primary"
+              leftIcon={<Icon as={FiSearch} />}
+              onClick={handleSearch}
+              mt={4}
+              w="full"
+            >
+              Search Vehicles
+            </Button>
+          </CardBody>
+        </Card>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Vehicle Type</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                    <option>Toyota Sienna (Standard)</option>
-                    <option>Toyota Sienna Executive</option>
-                    <option>Toyota Sienna VIP</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">Trip Type</label>
-                  <select className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent">
-                    <option>One Way</option>
-                    <option>Round Trip</option>
-                    <option>Hourly Rental</option>
-                  </select>
-                </div>
-              </div>
+        <VStack spacing={6} align="stretch">
+          <HStack justify="space-between">
+            <Heading size="lg">Available Vehicles</Heading>
+            <Text color="gray.600">
+              {filteredVehicles.length} vehicle(s) found
+            </Text>
+          </HStack>
 
-              <div>
-                <label className="block text-sm font-medium text-gray-700 mb-2">Special Requirements</label>
-                <textarea 
-                  rows={3}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent"
-                  placeholder="Any special requirements or notes..."
-                ></textarea>
-              </div>
-
-              <motion.button
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                type="submit"
-                className="w-full bg-gradient-to-r from-primary-600 to-primary-700 text-white py-4 rounded-lg font-semibold hover:from-primary-700 hover:to-primary-800 transition-all duration-300 shadow-lg"
-              >
-                Book Vehicle
-              </motion.button>
-            </form>
-          </motion.div>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="bg-gray-900 text-white py-12">
-        <div className="max-w-7xl mx-auto px-4">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div>
-              <div className="flex items-center space-x-3 mb-4">
-                <div className="relative w-12 h-12">
+          {filteredVehicles.length === 0 ? (
+            <Card bg={cardBg}>
+              <CardBody>
+                <Center py={8}>
+                  <VStack>
+                    <Icon as={FiSearch} boxSize={12} color="gray.400" />
+                    <Text color="gray.600">No vehicles found for your search criteria</Text>
+                    <Button
+                      colorScheme="primary"
+                      variant="outline"
+                      onClick={() => {
+                        setSearchParams({ from: '', to: '', date: '', passengers: 1 });
+                        setFilteredVehicles(vehicles);
+                      }}
+                    >
+                      Clear Filters
+                    </Button>
+                  </VStack>
+                </Center>
+              </CardBody>
+            </Card>
+          ) : (
+            <Grid templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }} gap={6}>
+              {filteredVehicles.map((vehicle) => (
+                <Card key={vehicle.id} bg={cardBg}>
+                  <CardBody>
+                    <VStack align="stretch" spacing={4}>
                   <Image
-                    src="/logo.png"
-                    alt="Engraced Smile Logistics"
-                    fill
-                    className="object-contain"
-                    sizes="48px"
-                  />
-                </div>
-              </div>
-              <p className="text-gray-400 mb-4">Premium vehicle transportation services</p>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Vehicle Services</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>Inter-State Transportation</li>
-                <li>Airport Transfers</li>
-                <li>City Tours</li>
-                <li>Corporate Travel</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Support</h4>
-              <ul className="space-y-2 text-gray-400">
-                <li>24/7 Customer Service</li>
-                <li>Real-time Tracking</li>
-                <li>Driver Information</li>
-                <li>Contact Us</li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="text-lg font-semibold mb-4">Contact</h4>
-              <p className="text-gray-400 mb-4">Get in touch for vehicle bookings</p>
-              <button className="bg-gradient-to-r from-primary-600 to-primary-700 text-white px-4 py-2 rounded-lg hover:from-primary-700 hover:to-primary-800 transition-colors">
-                Book Vehicle
-              </button>
-            </div>
-          </div>
-          <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-500">
-            <p>© 2024 Engraced Smile Logistics. All rights reserved.</p>
-          </div>
-        </div>
-      </footer>
-    </div>
+                        src={vehicle.images[0] || '/sienna.jpg'}
+                        alt={vehicle.name}
+                        borderRadius="lg"
+                        h="200px"
+                        w="full"
+                        objectFit="cover"
+                      />
+                      <VStack align="start" spacing={2}>
+                        <HStack justify="space-between" w="full">
+                          <Heading size="md">{vehicle.name}</Heading>
+                          <Badge colorScheme="green" variant="subtle">
+                            {vehicle.type.replace('_', ' ').toUpperCase()}
+                          </Badge>
+                        </HStack>
+                        <Text color="gray.600">{vehicle.description}</Text>
+                        {vehicle.driver && (
+                          <HStack>
+                            <Icon as={FiUsers} color="gray.500" />
+                            <Text fontSize="sm" color="gray.600">
+                              Driver: {vehicle.driver.firstName} {vehicle.driver.lastName}
+                            </Text>
+                          </HStack>
+                        )}
+                        <Divider />
+                        <VStack align="stretch" spacing={3}>
+                          <Text fontWeight="semibold">Available Routes:</Text>
+                          {vehicle.routes?.map((route) => (
+                            <Card key={route.id} variant="outline" size="sm">
+                              <CardBody>
+                                <VStack align="stretch" spacing={2}>
+                                  <HStack justify="space-between">
+                                    <Text fontWeight="medium">
+                                      {route.departureCity} → {route.arrivalCity}
+                                    </Text>
+                                    <Text fontWeight="bold" color="primary.500">
+                                      ₦{route.price.toLocaleString()}
+                                    </Text>
+                                  </HStack>
+                                  <HStack justify="space-between" fontSize="sm" color="gray.600">
+                                    <HStack>
+                                      <Icon as={FiClock} />
+                                      <Text>{route.departureTime}</Text>
+                                    </HStack>
+                                    {route.estimatedDuration && (
+                                      <Text>{Math.floor(route.estimatedDuration / 60)}h {route.estimatedDuration % 60}m</Text>
+                                    )}
+                                    {route.distance && (
+                                      <Text>{route.distance}km</Text>
+                                    )}
+                                  </HStack>
+                                  <Button
+                                    colorScheme="primary"
+                                    size="sm"
+                                    onClick={() => handleVehicleSelect(vehicle, route)}
+                                  >
+                                    Book This Route
+                                  </Button>
+                                </VStack>
+                              </CardBody>
+                            </Card>
+                          ))}
+                        </VStack>
+                      </VStack>
+                    </VStack>
+                  </CardBody>
+                </Card>
+              ))}
+            </Grid>
+          )}
+        </VStack>
+      </Container>
+    </Box>
   );
 }

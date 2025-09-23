@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom styles */
+/* Basic styles */
 body {
   margin: 0;
   padding: 0;

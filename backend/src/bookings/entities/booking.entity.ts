@@ -8,6 +8,8 @@ import {
   JoinColumn,
 } from 'typeorm';
 import { User } from '../../users/entities/user.entity';
+import { Vehicle } from '../../vehicles/entities/vehicle.entity';
+import { Route } from '../../vehicles/entities/route.entity';
 
 export enum BookingType {
   CAR = 'car',
@@ -130,6 +132,20 @@ export class Booking {
 
   @Column()
   userId: string;
+
+  @ManyToOne(() => Vehicle, (vehicle) => vehicle.bookings, { nullable: true })
+  @JoinColumn({ name: 'vehicleId' })
+  vehicle: Vehicle;
+
+  @Column({ nullable: true })
+  vehicleId: string;
+
+  @ManyToOne(() => Route, (route) => route.bookings, { nullable: true })
+  @JoinColumn({ name: 'routeId' })
+  route: Route;
+
+  @Column({ nullable: true })
+  routeId: string;
 
   @CreateDateColumn()
   createdAt: Date;

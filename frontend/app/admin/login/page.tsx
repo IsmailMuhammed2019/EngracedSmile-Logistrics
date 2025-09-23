@@ -2,155 +2,238 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import { motion } from 'framer-motion';
-import { Eye, EyeOff, Lock, User } from 'lucide-react';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
-import Image from 'next/image';
+import {
+  Box,
+  Container,
+  Card,
+  CardBody,
+  CardHeader,
+  Heading,
+  Text,
+  Button,
+  VStack,
+  HStack,
+  Icon,
+  Input,
+  InputGroup,
+  InputLeftElement,
+  useToast,
+  Alert,
+  AlertIcon,
+  AlertTitle,
+  AlertDescription,
+} from '@chakra-ui/react';
+import {
+  FiUser,
+  FiLock,
+  FiEye,
+  FiEyeOff,
+  FiArrowLeft,
+} from 'react-icons/fi';
 
 export default function AdminLoginPage() {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
+  const [formData, setFormData] = useState({
+    email: '',
+    password: '',
+  });
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const router = useRouter();
+  const toast = useToast();
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value,
+    }));
+    setError('');
+  };
+
+  const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsLoading(true);
+    setLoading(true);
     setError('');
 
-    // Simple authentication logic (in production, this would be server-side)
-    if (email === 'admin@engraced.com' && password === 'admin123') {
-      localStorage.setItem('admin_authenticated', 'true');
-      localStorage.setItem('admin_user', JSON.stringify({ 
-        email, 
-        name: 'Admin User',
-        role: 'admin' 
-      }));
-      router.push('/admin/dashboard');
-    } else {
-      setError('Invalid email or password');
+    try {
+      // For demo purposes, we'll use hardcoded admin credentials
+      // In production, this would make an API call to your backend
+      if (formData.email === 'admin@engraced.com' && formData.password === 'admin123') {
+        // Store admin authentication
+        localStorage.setItem('admin_authenticated', 'true');
+        localStorage.setItem('admin_user', JSON.stringify({
+          id: '1',
+          name: 'Admin User',
+          email: 'admin@engraced.com',
+          role: 'ADMIN',
+        }));
+
+        toast({
+          title: 'Login Successful!',
+          description: 'Welcome to the admin dashboard',
+          status: 'success',
+          duration: 3000,
+          isClosable: true,
+        });
+
+        // Redirect to admin dashboard
+        router.push('/admin/dashboard');
+      } else {
+        setError('Invalid email or password. Please try again.');
+        toast({
+          title: 'Login Failed',
+          description: 'Invalid credentials. Please check your email and password.',
+          status: 'error',
+          duration: 3000,
+          isClosable: true,
+        });
+      }
+    } catch (error) {
+      setError('An error occurred during login. Please try again.');
+      toast({
+        title: 'Login Error',
+        description: 'Something went wrong. Please try again.',
+        status: 'error',
+        duration: 3000,
+        isClosable: true,
+      });
+    } finally {
+      setLoading(false);
     }
-    
-    setIsLoading(false);
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-primary-50 via-white to-primary-100 flex items-center justify-center p-4">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.6 }}
-        className="w-full max-w-md"
-      >
-        <Card className="shadow-2xl border-0">
-          <CardHeader className="text-center pb-8">
-            <div className="flex justify-center mb-4">
-              <div className="relative w-16 h-16">
-                <Image
-                  src="/logo.png"
-                  alt="Engraced Smile Logistics"
-                  fill
-                  className="object-contain"
-                  sizes="64px"
-                />
-              </div>
-            </div>
-            <CardTitle className="text-2xl font-bold text-gray-900">
+    <Box bg="gray.50" minH="100vh" py={8}>
+      <Container maxW="md">
+        <VStack spacing={8} align="stretch">
+          {/* Header */}
+          <VStack spacing={4} textAlign="center">
+            <Heading size="xl" color="primary.500">
               Admin Login
-            </CardTitle>
-            <CardDescription className="text-gray-600">
+            </Heading>
+            <Text color="gray.600">
               Sign in to access the admin dashboard
-            </CardDescription>
-          </CardHeader>
-          
-          <CardContent>
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {error && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="bg-red-50 border border-red-200 text-red-600 px-4 py-3 rounded-lg text-sm"
-                >
-                  {error}
-                </motion.div>
-              )}
+            </Text>
+          </VStack>
 
-              <div className="space-y-2">
-                <Label htmlFor="email" className="text-sm font-medium text-gray-700">
-                  Email Address
-                </Label>
-                <div className="relative">
-                  <User className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                  <Input
-                    id="email"
-                    type="email"
-                    placeholder="admin@engraced.com"
-                    value={email}
-                    onChange={(e) => setEmail(e.target.value)}
-                    className="pl-10 h-12"
-                    required
-                  />
-                </div>
-              </div>
+          {/* Login Form */}
+          <Card bg="white" boxShadow="lg">
+            <CardHeader>
+              <Heading size="md" textAlign="center">
+                Welcome Back
+              </Heading>
+              <Text color="gray.600" textAlign="center" fontSize="sm">
+                Enter your credentials to continue
+              </Text>
+            </CardHeader>
+            <CardBody>
+              <form onSubmit={handleLogin}>
+                <VStack spacing={4} align="stretch">
+                  {error && (
+                    <Alert status="error">
+                      <AlertIcon />
+                      <AlertTitle>Login Failed!</AlertTitle>
+                      <AlertDescription>{error}</AlertDescription>
+                    </Alert>
+                  )}
 
-              <div className="space-y-2">
-                <Label htmlFor="password" className="text-sm font-medium text-gray-700">
-                  Password
-                </Label>
-                <div className="relative">
-                  <Lock className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-4 w-4" />
-                  <Input
-                    id="password"
-                    type={showPassword ? 'text' : 'password'}
-                    placeholder="Enter your password"
-                    value={password}
-                    onChange={(e) => setPassword(e.target.value)}
-                    className="pl-10 pr-10 h-12"
-                    required
-                  />
-                  <button
-                    type="button"
-                    onClick={() => setShowPassword(!showPassword)}
-                    className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"
+                  <VStack spacing={4} align="stretch">
+                    <Box>
+                      <Text fontSize="sm" fontWeight="medium" mb={2}>
+                        Email Address
+                      </Text>
+                      <InputGroup>
+                        <InputLeftElement>
+                          <Icon as={FiUser} color="gray.400" />
+                        </InputLeftElement>
+                        <Input
+                          type="email"
+                          name="email"
+                          placeholder="Enter your email"
+                          value={formData.email}
+                          onChange={handleInputChange}
+                          required
+                        />
+                      </InputGroup>
+                    </Box>
+
+                    <Box>
+                      <Text fontSize="sm" fontWeight="medium" mb={2}>
+                        Password
+                      </Text>
+                      <InputGroup>
+                        <InputLeftElement>
+                          <Icon as={FiLock} color="gray.400" />
+                        </InputLeftElement>
+                        <Input
+                          type={showPassword ? 'text' : 'password'}
+                          name="password"
+                          placeholder="Enter your password"
+                          value={formData.password}
+                          onChange={handleInputChange}
+                          required
+                        />
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          onClick={() => setShowPassword(!showPassword)}
+                          position="absolute"
+                          right="0"
+                          top="0"
+                          height="100%"
+                          px={3}
+                        >
+                          <Icon as={showPassword ? FiEyeOff : FiEye} />
+                        </Button>
+                      </InputGroup>
+                    </Box>
+                  </VStack>
+
+                  <Button
+                    type="submit"
+                    colorScheme="primary"
+                    size="lg"
+                    isLoading={loading}
+                    loadingText="Signing in..."
+                    w="full"
                   >
-                    {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
-                  </button>
-                </div>
-              </div>
+                    Sign In
+                  </Button>
+                </VStack>
+              </form>
+            </CardBody>
+          </Card>
 
-              <Button
-                type="submit"
-                className="w-full h-12 bg-gradient-to-r from-primary-600 to-primary-700 hover:from-primary-700 hover:to-primary-800 text-white font-semibold"
-                disabled={isLoading}
-              >
-                {isLoading ? (
-                  <div className="flex items-center space-x-2">
-                    <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin"></div>
-                    <span>Signing in...</span>
-                  </div>
-                ) : (
-                  'Sign In'
-                )}
-              </Button>
-            </form>
+          {/* Demo Credentials */}
+          <Card bg="blue.50" borderColor="blue.200">
+            <CardBody>
+              <VStack spacing={2} align="start">
+                <Text fontWeight="semibold" color="blue.800">
+                  Demo Credentials:
+                </Text>
+                <Text fontSize="sm" color="blue.700">
+                  Email: admin@engraced.com
+                </Text>
+                <Text fontSize="sm" color="blue.700">
+                  Password: admin123
+                </Text>
+              </VStack>
+            </CardBody>
+          </Card>
 
-            <div className="mt-6 p-4 bg-blue-50 rounded-lg">
-              <h4 className="font-semibold text-blue-900 mb-2">Demo Credentials:</h4>
-              <p className="text-sm text-blue-700">
-                Email: <code className="bg-blue-100 px-2 py-1 rounded">admin@engraced.com</code>
-              </p>
-              <p className="text-sm text-blue-700">
-                Password: <code className="bg-blue-100 px-2 py-1 rounded">admin123</code>
-              </p>
-            </div>
-          </CardContent>
-        </Card>
-      </motion.div>
-    </div>
+          {/* Back to Home */}
+          <HStack justify="center">
+            <Button
+              variant="outline"
+              leftIcon={<Icon as={FiArrowLeft} />}
+              onClick={() => router.push('/')}
+            >
+              Back to Home
+            </Button>
+          </HStack>
+        </VStack>
+      </Container>
+    </Box>
   );
 }
